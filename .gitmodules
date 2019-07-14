@@ -1,3 +1,3 @@
-[submodule "CStoTS/Lib/CSharpAnalyze"]
-	path = CStoTS/Lib/CSharpAnalyze
+[submodule "Lib/CSharpAnalyze"]
+	path = Lib/CSharpAnalyze
 	url = git@github.com:kazenetu/CSharpAnalyze.git

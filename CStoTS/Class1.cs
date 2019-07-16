@@ -26,7 +26,8 @@ namespace CStoTS
 
       // C# Source Code
       var testBase = new TestBase();
-      testBase.CreateFileData("test", string.Empty, @"public class Test
+      testBase.CreateFileData("test.cs", string.Empty, 
+      @"public class Test
       {
       }", null);
 

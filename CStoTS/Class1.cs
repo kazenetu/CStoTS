@@ -43,7 +43,13 @@ namespace CStoTS
     }
 
     string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed analyzed){
-      return ConvertTS((dynamic)analyzed.FileRoot.Members.First());
+      var result = new StringBuilder();
+
+      result.AppendLine($"------{analyzed.FilePath} => {analyzed.FilePath.Replace(".cs",".ts",StringComparison.CurrentCulture)}------");
+
+      result.AppendLine(ConvertTS((dynamic)analyzed.FileRoot.Members.First()));
+
+      return result.ToString();
     }
 
     string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems.IItemClass item, int indent = 0)

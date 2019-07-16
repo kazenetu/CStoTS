@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="CSharpAnalyze">
-      <HintPath>../Lib/CSharpAnalyze/Lib/$(Configuration)/CSharpAnalyze.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+    <ProjectReference Include="..\Lib\CSharpAnalyze\CSharpAnalyze\CSharpAnalyze.csproj" />  </ItemGroup>
 </Project>

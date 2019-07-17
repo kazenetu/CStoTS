@@ -4,11 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CStoTS", "CStoTS\CStoTS.csproj", "{418E8F56-18DF-4312-87AB-701BD8FFEC59}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A333F672-6ACD-4A9D-9366-4579BD84F206} = {A333F672-6ACD-4A9D-9366-4579BD84F206}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpAnalyze", "Lib\CSharpAnalyze\CSharpAnalyze\CSharpAnalyze.csproj", "{A333F672-6ACD-4A9D-9366-4579BD84F206}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,10 +15,6 @@ Global
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A333F672-6ACD-4A9D-9366-4579BD84F206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A333F672-6ACD-4A9D-9366-4579BD84F206}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A333F672-6ACD-4A9D-9366-4579BD84F206}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A333F672-6ACD-4A9D-9366-4579BD84F206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

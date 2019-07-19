@@ -1,32 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace CStoTS
 {
-  public class Class1
+  public class Converter
   {
-    /// <summary>
-    /// Entry Point Method
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
-    static int Main(string[] args)
-    {
-      
+    void Convert(){
       var csApplication = new CSharpAnalyze.ApplicationService.AnalyzeApplication();
 
       // Register Analyzed Event
       csApplication.Register<CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed>(csApplication, (ev) =>
       {
-        var class1 = new Class1();
-        var result = class1.ConvertTS(ev);
+        var result = ConvertTS(ev);
         Console.WriteLine(result);
       });
 
       // C# Source Code
       var testBase = new TestBase();
-      testBase.CreateFileData("test.cs", string.Empty, 
+      testBase.CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
       }", null);
@@ -39,13 +32,12 @@ namespace CStoTS
       Console.ReadKey();
 #endif
 
-      return 0;
     }
-
-    string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed analyzed){
+    string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed analyzed)
+    {
       var result = new StringBuilder();
 
-      result.AppendLine($"------{analyzed.FilePath} => {analyzed.FilePath.Replace(".cs",".ts",StringComparison.CurrentCulture)}------");
+      result.AppendLine($"------{analyzed.FilePath} => {analyzed.FilePath.Replace(".cs", ".ts", StringComparison.CurrentCulture)}------");
 
       result.AppendLine(ConvertTS((dynamic)analyzed.FileRoot.Members.First()));
 

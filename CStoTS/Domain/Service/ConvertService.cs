@@ -1,6 +1,7 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces.Repository;
 using CStoTS.Domain.Model;
 using CStoTS.Infrastructure;
+using System;
 
 namespace CStoTS.Domain.Service
 {
@@ -9,7 +10,6 @@ namespace CStoTS.Domain.Service
   /// </summary>
   internal class ConvertService
   {
-    
     public void Convert(string inputCSRoot, string outputTSRoot, ITSFileRepository outputRepository, ICSFileRepository inputRepository)
     {
       var csApplication = new CSharpAnalyze.ApplicationService.AnalyzeApplication();
@@ -19,6 +19,10 @@ namespace CStoTS.Domain.Service
       {
         var converter = new Converter();
         var result = converter.ConvertTS(ev);
+
+        // output file
+        var filePath = ev.FilePath.Replace(".cs", ".ts", StringComparison.CurrentCulture);
+        outputRepository.WriteFile($"{outputTSRoot}{filePath}", result);
       });
 
       // Run C# Analyze

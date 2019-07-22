@@ -10,6 +10,11 @@ namespace CStoTSTest
     [Fact]
     public void Test1()
     {
+      // テストに必要な機能
+      // 1. テスト用C#ソースコード作成
+      // 2. TypeScript出力時にテストコード注入()
+
+
       // 一旦実装
 
       // C#ソース作成

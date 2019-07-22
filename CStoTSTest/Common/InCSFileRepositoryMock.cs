@@ -9,7 +9,7 @@ namespace CStoTS
   /// <summary>
   /// テスト用FileRepository
   /// </summary>
-  internal class CSFileRepositoryMock : ICSFileRepository
+  internal class InCSFileRepositoryMock : ICSFileRepository
   {
     /// <summary>
     /// ファイルリスト

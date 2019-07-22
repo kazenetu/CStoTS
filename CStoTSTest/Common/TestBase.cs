@@ -11,7 +11,7 @@ namespace CStoTS
     /// <summary>
     /// テスト用FileRepository
     /// </summary>
-    public CSFileRepositoryMock Files { get; } = new CSFileRepositoryMock();
+    public InCSFileRepositoryMock Files { get; } = new InCSFileRepositoryMock();
 
     /// <summary>
     /// ソースコード

@@ -7,7 +7,7 @@ using System.Linq;
 namespace CStoTS
 {
   /// <summary>
-  /// テスト用FileRepository
+  /// テスト用FileRepository : 入力C#ソースコード
   /// </summary>
   internal class InCSFileRepositoryMock : ICSFileRepository
   {

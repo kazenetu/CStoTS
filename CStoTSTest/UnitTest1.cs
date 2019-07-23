@@ -22,7 +22,7 @@ namespace CStoTSTest
       testBase.CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
-      }", null);
+      }");
 
       // •ÏŠ·Eo—Í
       var csToTs = new ConvertApplication();

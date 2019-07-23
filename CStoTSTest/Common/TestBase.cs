@@ -42,11 +42,10 @@ namespace CStoTS
     /// <param name="fileName">ファイル名</param>
     /// <param name="addUsing">追加Using</param>
     /// <param name="sourceCode">ソースコード</param>
-    /// <param name="delegateMethod">イベント処理</param>
-    public void CreateFileData(string fileName, string addUsing, string sourceCode, Action<IAnalyzed> delegateMethod)
+    public void CreateFileData(string fileName, string addUsing, string sourceCode)
     {
-      var source = string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode, delegateMethod);
-      Files.Add(fileName, source, delegateMethod);
+      var source = string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode);
+      Files.Add(fileName, source);
     }
 
     #endregion

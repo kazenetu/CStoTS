@@ -2,6 +2,7 @@ using CStoTS;
 using CStoTS.ApplicationService;
 using CStoTSTest.Common;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace CStoTSTest
@@ -26,9 +27,12 @@ namespace CStoTSTest
       // •ÏŠ·Šm”F
       var actual = tsFiles.Scripts.First();
       Assert.Equal("test.ts", actual.filePath);
-      Assert.Equal(
-        @"class Test{
-        }", actual.typeScripts);
+
+      var expectedScript = new StringBuilder();
+      expectedScript.AppendLine("class Test{");
+      expectedScript.AppendLine("}");
+
+      Assert.Equal(expectedScript.ToString(), actual.typeScripts);
     }
   }
 }

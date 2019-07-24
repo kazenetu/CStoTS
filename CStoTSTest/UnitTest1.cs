@@ -1,6 +1,7 @@
 using CStoTS;
 using CStoTS.ApplicationService;
 using CStoTSTest.Common;
+using System.Linq;
 using Xunit;
 
 namespace CStoTSTest
@@ -10,13 +11,6 @@ namespace CStoTSTest
     [Fact]
     public void Test1()
     {
-      // テストに必要な機能
-      // 1. テスト用C#ソースコード作成
-      // 2. TypeScript出力時にテストコード注入()
-
-
-      // 一旦実装
-
       // C#ソース作成
       var testBase = new TestBase();
       testBase.CreateFileData("test.cs", string.Empty,
@@ -24,9 +18,17 @@ namespace CStoTSTest
       {
       }");
 
-      // 変換・出力
+      // 変換
       var csToTs = new ConvertApplication();
-      csToTs.Convert(string.Empty, string.Empty, new TSFileRepositoryMock(), testBase.Files);
+      var tsFiles = new TSFileRepositoryMock();
+      csToTs.Convert(string.Empty, string.Empty, tsFiles, testBase.Files);
+
+      // 変換確認
+      var actual = tsFiles.Scripts.First();
+      Assert.Equal("test.ts", actual.filePath);
+      Assert.Equal(
+        @"class Test{
+        }", actual.typeScripts);
     }
   }
 }

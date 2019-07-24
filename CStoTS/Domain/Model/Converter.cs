@@ -13,7 +13,7 @@ namespace CStoTS.Domain.Model
     {
       var result = new StringBuilder();
 
-      result.AppendLine(ConvertTS((dynamic)analyzed.FileRoot.Members.First(), 0));
+      result.Append(ConvertTS((dynamic)analyzed.FileRoot.Members.First(), 0));
 
       return result.ToString();
     }

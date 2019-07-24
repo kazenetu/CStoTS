@@ -21,7 +21,7 @@ namespace CStoTS.Domain.Model
     private string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems.IItemClass item, int indent = 0)
     {
       var result = new StringBuilder();
-      var indentSpace = getIndentSpace(indent);
+      var indentSpace = GetIndentSpace(indent);
 
       result.AppendLine($"{indentSpace}class {item.Name}{{");
       result.AppendLine($"{indentSpace}}}");
@@ -33,7 +33,7 @@ namespace CStoTS.Domain.Model
     /// インデントスペース取得
     /// </summary>
     /// <param name="indentSpace">インデント数</param>
-    private string getIndentSpace(int indentSpace)
+    private string GetIndentSpace(int indentSpace)
     {
       var result = new StringBuilder();
       while(indentSpace > 0)

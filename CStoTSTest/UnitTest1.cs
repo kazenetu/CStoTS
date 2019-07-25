@@ -12,19 +12,19 @@ namespace CStoTSTest
     [Fact]
     public void Test1()
     {
-      // C#ƒ\[ƒXì¬
+      // C#ã‚½ãƒ¼ã‚¹ä½œæˆ
       var testBase = new TestBase();
       testBase.CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
       }");
 
-      // •ÏŠ·
+      // å¤‰æ›
       var csToTs = new ConvertApplication();
       var tsFiles = new TSFileRepositoryMock();
       csToTs.Convert(string.Empty, string.Empty, tsFiles, testBase.Files);
 
-      // •ÏŠ·Šm”F
+      // å¤‰æ›ç¢ºèª
       var actual = tsFiles.Scripts.First();
       Assert.Equal("test.ts", actual.filePath);
 

@@ -1,20 +1,31 @@
-﻿using CSharpAnalyze.Domain.PublicInterfaces.Events;
-using System;
-using System.Collections.Generic;
+﻿using CStoTS.ApplicationService;
+using CStoTSTest.Common;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace CStoTS
 {
-  class TestBase
+  public class TestBase
   {
     /// <summary>
-    /// テスト用FileRepository
+    /// C#入力用FileRepository
     /// </summary>
-    public InCSFileRepositoryMock Files { get; } = new InCSFileRepositoryMock();
+    /// <remarks>現在の実装の維持のため</remarks>
+    internal InCSFileRepositoryMock Files { get; } = new InCSFileRepositoryMock();
 
     /// <summary>
-    /// ソースコード
+    /// C#入力用FileRepository
+    /// </summary>
+    private InCSFileRepositoryMock csFiles = new InCSFileRepositoryMock();
+
+    /// <summary>
+    /// Typescript出力用FileRepository
+    /// </summary>
+    private TSFileRepositoryMock tsFiles = new TSFileRepositoryMock();
+
+    /// <summary>
+    /// C#ソースコードの書式用文字列
     /// </summary>
     private string BaseSource = string.Empty;
 
@@ -34,10 +45,8 @@ namespace CStoTS
       BaseSource = baseSource.ToString();
     }
 
-    #region テスト情報作成メソッド
-
     /// <summary>
-    /// テスト情報作成
+    /// C#入力ソースコード作成
     /// </summary>
     /// <param name="fileName">ファイル名</param>
     /// <param name="addUsing">追加Using</param>
@@ -45,9 +54,32 @@ namespace CStoTS
     public void CreateFileData(string fileName, string addUsing, string sourceCode)
     {
       var source = string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode);
+      csFiles.Add(fileName, source);
       Files.Add(fileName, source);
     }
 
-    #endregion
+    /// <summary>
+    /// TypeScript変換
+    /// </summary>
+    public void ConvertTS()
+    {
+      var csToTs = new ConvertApplication();
+      csToTs.Convert(string.Empty, string.Empty, tsFiles, csFiles);
+    }
+
+    /// <summary>
+    /// 変換後のTypescriptを取得
+    /// </summary>
+    /// <param name="filePath">ファイルの相対パス</param>
+    /// <returns>Typescriptまたはnull</returns>
+    public string GetTypeScript(string filePath)
+    {
+      var result = tsFiles.Scripts.Where(item => item.filePath == filePath);
+      if (!result.Any())
+      {
+        return null;
+      }
+      return result.First().typeScripts;
+    }
   }
 }

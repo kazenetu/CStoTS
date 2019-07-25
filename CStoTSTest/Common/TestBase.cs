@@ -11,12 +11,6 @@ namespace CStoTS
     /// <summary>
     /// C#入力用FileRepository
     /// </summary>
-    /// <remarks>現在の実装の維持のため</remarks>
-    internal InCSFileRepositoryMock Files { get; } = new InCSFileRepositoryMock();
-
-    /// <summary>
-    /// C#入力用FileRepository
-    /// </summary>
     private InCSFileRepositoryMock csFiles = new InCSFileRepositoryMock();
 
     /// <summary>
@@ -55,7 +49,6 @@ namespace CStoTS
     {
       var source = string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode);
       csFiles.Add(fileName, source);
-      Files.Add(fileName, source);
     }
 
     /// <summary>

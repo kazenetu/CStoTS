@@ -1,24 +1,93 @@
-﻿using System;
+﻿using CSharpAnalyze.Domain.PublicInterfaces;
+using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
+using CSharpAnalyze.Domain.PublicInterfaces.Events;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace CStoTS.Domain.Model
 {
   /// <summary>
-  /// TypeScript変換クラス
+  /// 変換インターフェース
   /// </summary>
-  internal class Converter
+  internal interface IConvertable
   {
-    public string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed analyzed, int indent = 0)
+    string Convert(IAnalyzeItem item, int indent);
+  }
+
+  /// <summary>
+  /// TS変換クラスのスーパークラス
+  /// </summary>
+  internal class ConverterBase
+  {
+    /// <summary>
+    /// C#解析結果とTS変換クラスのマップ
+    /// </summary>
+    private static Dictionary<Type, Func<IConvertable>> table = new Dictionary<Type, Func<IConvertable>>()
     {
-      var result = new StringBuilder();
+      {typeof(IItemClass), ()=>new ConverterClass() },
+    };
 
-      result.Append(ConvertTS((dynamic)analyzed.FileRoot.Members.First(), 0));
+    /// <summary>
+    /// C#解析結果に該当するTS変換クラスを返す
+    /// </summary>
+    /// <param name="csItem">C#解析結果</param>
+    /// <returns>TS変換クラスのインスタンス または null</returns>
+    /// <remarks>該当しない場合はnullを返す</remarks>
+    public static IConvertable GetConverter(IAnalyzeItem csItem)
+    {
+      // 対象リストからC#解析結果に該当するTS変換クラスを抽出
+      var query = table.Where(item => item.Key.IsInstanceOfType(csItem));
+      if (!query.Any())
+      {
+        return null;
+      }
 
-      return result.ToString();
+      // 該当したTS変換クラスのインスタンスを返す
+      return query.First().Value();
     }
 
-    private string ConvertTS(CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems.IItemClass item, int indent = 0)
+
+    /// <summary>
+    /// インデントスペース取得
+    /// </summary>
+    /// <param name="indentSpace">インデント数</param>
+    protected string GetIndentSpace(int indentSpace)
+    {
+      var result = new StringBuilder();
+      while (indentSpace > 0)
+      {
+        result.Append("  ");
+        indentSpace--;
+      }
+      return result.ToString();
+    }
+  }
+
+  /// <summary>
+  /// TS変換クラス：class
+  /// </summary>
+  internal class ConverterClass: ConverterBase, IConvertable
+  {
+    /// <summary>
+    /// エントリメソッド
+    /// </summary>
+    /// <param name="item">C#解析結果</param>
+    /// <param name="indent">インデント数</param>
+    /// <returns>TypeScript変換結果</returns>
+    public string Convert(IAnalyzeItem item, int indent)
+    {
+      return Convert(item as IItemClass, indent);
+    }
+
+    /// <summary>
+    /// 変換メソッド
+    /// </summary>
+    /// <param name="item">C#解析結果</param>
+    /// <param name="indent">インデント数</param>
+    /// <returns>TypeScript変換結果</returns>
+    private string Convert(IItemClass item, int indent)
     {
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
@@ -28,20 +97,40 @@ namespace CStoTS.Domain.Model
 
       return result.ToString();
     }
+  }
 
-    /// <summary>
-    /// インデントスペース取得
-    /// </summary>
-    /// <param name="indentSpace">インデント数</param>
-    private string GetIndentSpace(int indentSpace)
+
+
+  /// <summary>
+  /// TypeScript変換クラス
+  /// </summary>
+  internal class Converter
+  {
+    public Converter()
+    {
+    }
+
+    public string ConvertTS(IAnalyzed analyzed, int indent = 0)
     {
       var result = new StringBuilder();
-      while(indentSpace > 0)
+
+      // C#解析結果を取得
+      var targetItem = analyzed.FileRoot.Members.First();
+
+      // TS変換クラスを取得
+      var targetConverter = ConverterBase.GetConverter(targetItem);
+      if (targetConverter is null)
       {
-        result.Append("  ");
-        indentSpace--;
+        return string.Empty;
       }
+
+      // 該当したTS変換クラスの変換メソッドを呼び出す
+      result.Append(targetConverter.Convert(targetItem, 0));
+
+      // 変換結果を返す
       return result.ToString();
     }
   }
+
+
 }

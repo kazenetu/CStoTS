@@ -17,9 +17,9 @@ namespace CStoTS.Domain.Model
   }
 
   /// <summary>
-  /// TS変換クラスのスーパークラス
+  /// TypeScript変換ユーティリティ
   /// </summary>
-  internal class ConverterBase
+  internal static class ConvertUtility
   {
     /// <summary>
     /// C#解析結果とTS変換クラスのマップ
@@ -30,11 +30,11 @@ namespace CStoTS.Domain.Model
     };
 
     /// <summary>
-    /// C#解析結果に該当するTS変換クラスを返す
+    /// C#解析結果からTS変換変換結果を返す
     /// </summary>
     /// <param name="csItem">C#解析結果</param>
     /// <returns>TypeScript変換結果</returns>
-    public static string Convert(IAnalyzeItem csItem,int indent)
+    public static string Convert(IAnalyzeItem csItem, int indent)
     {
       // 対象リストからC#解析結果に該当するTS変換クラスを抽出
       var query = table.Where(item => item.Key.IsInstanceOfType(csItem));
@@ -43,11 +43,16 @@ namespace CStoTS.Domain.Model
         return string.Empty;
       }
 
-      // 該当したTS変換クラスのインスタンスを返す
+      // 該当したTS変換クラスのインスタンスからTS変換変換結果を返す
       return query.First().Value().Convert(csItem, indent);
     }
+  }
 
-
+  /// <summary>
+  /// TS変換クラスのスーパークラス
+  /// </summary>
+  internal abstract class ConverterBase
+  {
     /// <summary>
     /// インデントスペース取得
     /// </summary>
@@ -113,7 +118,7 @@ namespace CStoTS.Domain.Model
       var targetItem = analyzed.FileRoot.Members.First();
 
       // TS変換変換結果を取得
-      result.Append(ConverterBase.Convert(targetItem, 0));
+      result.Append(ConvertUtility.Convert(targetItem, 0));
 
       // 変換結果を返す
       return result.ToString();

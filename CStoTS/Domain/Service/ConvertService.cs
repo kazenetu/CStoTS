@@ -17,7 +17,7 @@ namespace CStoTS.Domain.Service
       // Register Analyzed Event
       csApplication.Register<CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed>(csApplication, (ev) =>
       {
-        var converter = new Converter();
+        var converter = new MainConverter();
         var result = converter.ConvertTS(ev);
 
         // output file

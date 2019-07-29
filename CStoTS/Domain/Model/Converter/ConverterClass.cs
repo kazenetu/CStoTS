@@ -1,6 +1,8 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CStoTS.Domain.Model.Converter
@@ -10,6 +12,12 @@ namespace CStoTS.Domain.Model.Converter
   /// </summary>
   internal class ConverterClass : AbstractConverter, IConvertable
   {
+    private enum ClassType
+    {
+      Normal,
+      Inner
+    }
+
     /// <summary>
     /// エントリメソッド
     /// </summary>
@@ -32,8 +40,77 @@ namespace CStoTS.Domain.Model.Converter
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
 
-      result.AppendLine($"{indentSpace}class {item.Name}{{");
+      // クラス定義
+      result.Append(indentSpace);
+      switch (GetClassType(item))
+      { 
+        case ClassType.Normal:
+          result.Append($"class {item.Name}{GetClassInfo(item)}");
+          break;
+        case ClassType.Inner:
+          result.Append($"public static {item.Name} = class{GetClassInfo(item)}");
+          break;
+      }
+      result.AppendLine(" {");
+
+      // メンバー追加
+      foreach(var member in item.Members){
+        result.Append(ConvertUtility.Convert(member, indent + 1));
+      }
+
       result.AppendLine($"{indentSpace}}}");
+
+      return result.ToString();
+    }
+
+    private ClassType GetClassType(IItemClass item)
+    {
+      if (item.Parent is IItemClass)
+      {
+        return ClassType.Inner;
+      }
+      return ClassType.Normal;
+    }
+
+    private string GetClassInfo(IItemClass item)
+    {
+      var result = new StringBuilder();
+
+      // ジェネリックスクラス
+      if(item.GenericTypes.Any()){
+        result.Append("<");
+        result.Append(string.Join(",", item.GenericTypes));
+        result.Append(">");
+      }
+
+      // スーパークラスあり
+      if (item.SuperClass.Any()){
+        var superClassList = new List<string>();
+        foreach(var targetItem in item.SuperClass){
+          superClassList.Add(targetItem.Name);
+        }
+
+        result.Append($" extends {string.Join(",", superClassList)}");
+      }
+
+      // インターフェイスあり
+      if (item.Interfaces.Any())
+      {
+        var interfaceList = new List<string>();
+        foreach (var targetItemList in item.Interfaces)
+        {
+          // パスを含むインターフェース名格納
+          var interfaceItem = string.Empty;
+          foreach (var targetItem in targetItemList)
+          {
+            interfaceItem +=targetItem.Name;
+          }
+          // インターフェース名追加
+          interfaceList.Add(interfaceItem);
+        }
+
+        result.Append($" implements {string.Join(",", interfaceList)}");
+      }
 
       return result.ToString();
     }

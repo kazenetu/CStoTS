@@ -79,18 +79,18 @@ namespace CStoTS.Domain.Model.Converter
       // ジェネリックスクラス
       if(item.GenericTypes.Any()){
         result.Append("<");
-        result.Append(string.Join(",", item.GenericTypes));
+        result.Append(string.Join(",", item.GenericTypes.Select(typeItem => GetTypeScriptType(typeItem))));
         result.Append(">");
       }
 
       // スーパークラスあり
       if (item.SuperClass.Any()){
-        var superClassList = new List<string>();
+        var superClass = new StringBuilder();
         foreach(var targetItem in item.SuperClass){
-          superClassList.Add(targetItem.Name);
+          superClass.Append(GetTypeScriptType(targetItem.Name));
         }
 
-        result.Append($" extends {string.Join(",", superClassList)}");
+        result.Append($" extends {superClass.ToString()}");
       }
 
       // インターフェイスあり
@@ -103,7 +103,7 @@ namespace CStoTS.Domain.Model.Converter
           var interfaceItem = string.Empty;
           foreach (var targetItem in targetItemList)
           {
-            interfaceItem +=targetItem.Name;
+            interfaceItem += targetItem.Name;
           }
           // インターフェース名追加
           interfaceList.Add(interfaceItem);

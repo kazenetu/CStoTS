@@ -132,5 +132,69 @@ namespace CStoTSTest
 
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
+
+    [Fact]
+    public void GenericsSubFixedTypeTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test<T,U,V>
+      {
+      }");
+      CreateFileData("sub.cs", string.Empty,
+      @"
+      public class Sub :Test<string, int, decimal>
+      {
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("class Sub extends Test<String,Number,Number> {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    [Fact]
+    public void CommentTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"
+      /// <summary>
+      /// クラスコメント
+      /// </summary>
+      /// <typeparam name=""T"">A</typeparam>
+      /// <typeparam name=""U"">B</typeparam>
+      /// <typeparam name=""V"">C</typeparam>
+      public class Test<T,U,V>
+      {
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("/**");
+      expectedTS.AppendLine(" * クラスコメント");
+      expectedTS.AppendLine(" * @template T A");
+      expectedTS.AppendLine(" * @template U B");
+      expectedTS.AppendLine(" * @template V C");
+      expectedTS.AppendLine(" */");
+      expectedTS.AppendLine("class Test<T,U,V> {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
   }
 }

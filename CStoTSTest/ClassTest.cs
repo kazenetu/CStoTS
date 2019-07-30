@@ -88,7 +88,7 @@ namespace CStoTSTest
     {
       // C#ソース作成
       CreateFileData("test.cs", string.Empty,
-      @"public class Test<T,U,I>
+      @"public class Test<T,U,V>
       {
       }");
 
@@ -100,7 +100,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("class Test<T,U,I> {");
+      expectedTS.AppendLine("class Test<T,U,V> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

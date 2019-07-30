@@ -40,6 +40,9 @@ namespace CStoTS.Domain.Model.Converter
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
 
+      // クラスコメント
+      result.Append(GetTypeScriptComments(item, indentSpace));
+
       // クラス定義
       result.Append(indentSpace);
       switch (GetClassType(item))

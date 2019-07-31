@@ -12,6 +12,10 @@ namespace CStoTS.Domain.Model.Converter
   /// </summary>
   internal class ConverterClass : AbstractConverter, IConvertable
   {
+    /// <summary>
+    /// クラスタイプ
+    /// </summary>
+    /// <remarks>内部クラスか否か</remarks>
     private enum ClassType
     {
       Normal,
@@ -66,6 +70,11 @@ namespace CStoTS.Domain.Model.Converter
       return result.ToString();
     }
 
+    /// <summary>
+    /// クラスタイプの取得
+    /// </summary>
+    /// <param name="item">C#解析結果</param>
+    /// <returns>クラスタイプ</returns>
     private ClassType GetClassType(IItemClass item)
     {
       if (item.Parent is IItemClass)
@@ -75,6 +84,12 @@ namespace CStoTS.Domain.Model.Converter
       return ClassType.Normal;
     }
 
+    /// <summary>
+    /// クラス情報の取得
+    /// </summary>
+    /// <param name="item">C#解析結果</param>
+    /// <returns>クラス情報</returns>
+    /// <remarks>ジェネリックス、継承の文字列取得</remarks>
     private string GetClassInfo(IItemClass item)
     {
       var result = new StringBuilder();

@@ -27,6 +27,51 @@ namespace CStoTS.Domain.Model.Converter
     public string Convert(IItemInterface item, int indent)
     {
       var result = new StringBuilder();
+      var indentSpace = GetIndentSpace(indent);
+
+      // コメント
+      result.Append(GetTypeScriptComments(item, indentSpace));
+
+      // インターフェイス定義
+      result.Append(indentSpace);
+      result.Append($"interface {item.Name}");
+
+      // ジェネリックスクラス
+      if (item.GenericTypes.Any())
+      {
+        result.Append("<");
+        result.Append(string.Join(",", item.GenericTypes.Select(typeItem => GetTypeScriptType(typeItem))));
+        result.Append(">");
+      }
+
+      // インターフェイスあり
+      if (item.Interfaces.Any())
+      {
+        var interfaceList = new List<string>();
+        foreach (var targetItemList in item.Interfaces)
+        {
+          // パスを含むインターフェース名格納
+          var interfaceItem = string.Empty;
+          foreach (var targetItem in targetItemList)
+          {
+            interfaceItem += targetItem.Name;
+          }
+          // インターフェース名追加
+          interfaceList.Add(interfaceItem);
+        }
+
+        result.Append($" implements {string.Join(",", interfaceList)}");
+      }
+
+      result.AppendLine(" {");
+
+      // メンバー追加
+      foreach (var member in item.Members)
+      {
+        result.Append(ConvertUtility.Convert(member, indent + 1));
+      }
+
+      result.AppendLine($"{indentSpace}}}");
 
       return result.ToString();
     }

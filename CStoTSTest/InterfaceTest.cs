@@ -76,7 +76,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("interface Sub extends Test<String,Number,Number> {");
+      expectedTS.AppendLine("interface Sub implements Test<String,Number,Number> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

@@ -121,7 +121,7 @@ namespace CStoTS.Domain.Model.Converter
           var interfaceItem = string.Empty;
           foreach (var targetItem in targetItemList)
           {
-            interfaceItem += targetItem.Name;
+            interfaceItem += GetTypeScriptType(targetItem.Name);
           }
           // インターフェース名追加
           interfaceList.Add(interfaceItem);

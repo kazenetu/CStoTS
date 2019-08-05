@@ -29,6 +29,28 @@ namespace CStoTS.Domain.Model.Converter
     }
 
     /// <summary>
+    /// TypeScript用スコープを返す
+    /// </summary>
+    /// <param name="item">C#解析結果</param>
+    /// <returns>TypeScript用スコープ</returns>
+    protected string GetScope(IAnalyzeItem item)
+    {
+      foreach (var scope in item.Modifiers)
+      {
+        switch(scope){
+          case "private":
+          // 追加項目なし
+            break;
+
+          default:
+            return "export ";
+        }
+      }
+
+      return string.Empty;
+    }
+
+    /// <summary>
     /// 型のTypeScript変換
     /// </summary>
     /// <param name="src">C#用型</param>

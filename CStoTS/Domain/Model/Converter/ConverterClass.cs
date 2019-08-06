@@ -52,7 +52,7 @@ namespace CStoTS.Domain.Model.Converter
       switch (GetClassType(item))
       { 
         case ClassType.Normal:
-          result.Append($"class {item.Name}{GetClassInfo(item)}");
+          result.Append($"{GetScope(item)}class {item.Name}{GetClassInfo(item)}");
           break;
         case ClassType.Inner:
           result.Append($"public static {item.Name} = class{GetClassInfo(item)}");

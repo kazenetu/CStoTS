@@ -34,7 +34,7 @@ namespace CStoTS.Domain.Model.Converter
 
       // インターフェイス定義
       result.Append(indentSpace);
-      result.Append($"interface {item.Name}");
+      result.Append($"{GetScope(item)}interface {item.Name}");
 
       // ジェネリックスクラス
       if (item.GenericTypes.Any())

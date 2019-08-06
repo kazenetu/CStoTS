@@ -23,7 +23,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("class Test {");
+      expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -48,7 +48,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("class Test {");
+      expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public static Inner = class {");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
@@ -77,7 +77,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("class Sub extends Test {");
+      expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -100,7 +100,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("class Test<T,U,V> {");
+      expectedTS.AppendLine("export class Test<T,U,V> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

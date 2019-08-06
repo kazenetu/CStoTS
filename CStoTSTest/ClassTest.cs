@@ -196,5 +196,38 @@ namespace CStoTSTest
 
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
+
+    [Fact]
+    public void InterfaceTest()
+    {
+      // C#ソース作成
+      CreateFileData("interface.cs", string.Empty,
+      @"public interface Inf
+      {
+      }");
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test<T,U,V>
+      {
+      }");
+      CreateFileData("sub.cs", string.Empty,
+      @"
+      public class Sub :Test<string, int, decimal>,Inf
+      {
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Sub extends Test<String,Number,Number> implements Inf {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
   }
 }

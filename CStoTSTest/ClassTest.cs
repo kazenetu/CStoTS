@@ -4,6 +4,7 @@ using Xunit;
 
 namespace CStoTSTest
 {
+  [Trait("クラスのテスト", nameof(ClassTest))]
   public class ClassTest : TestBase
   {
     [Fact]

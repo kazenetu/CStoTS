@@ -4,6 +4,7 @@ using Xunit;
 
 namespace CStoTSTest
 {
+  [Trait("インターフェースのテスト", nameof(InterfaceTest))]
   public class InterfaceTest : TestBase
   {
     [Fact]

@@ -248,7 +248,7 @@ namespace CStoTSTest
       }");
       CreateFileData("sub.cs", string.Empty,
       @"
-      public class Sub :Test<string, int, decimal>,Inf.Inf2<int,decimal>
+      public class Sub :Test<string, int, decimal>,Inf,Inf2<int,decimal>
       {
       }");
 

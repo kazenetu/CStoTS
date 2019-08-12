@@ -60,12 +60,12 @@ namespace CStoTS.Domain.Model.Converter
       var lowerSrc = src.ToLower(CultureInfo.CurrentCulture);
       switch (lowerSrc)
       {
-        case "string":
-          return "String";
+        case "bool":
+          return "boolean";
         case "int":
         case "decimal":
         case "long":
-          return "Number";
+          return "number";
         case ",":
           return ", ";
       }

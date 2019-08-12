@@ -156,7 +156,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("export class Sub extends Test<String, Number, Number> {");
+      expectedTS.AppendLine("export class Sub extends Test<string, number, number> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -224,7 +224,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("export class Sub extends Test<String, Number, Number> implements Inf {");
+      expectedTS.AppendLine("export class Sub extends Test<string, number, number> implements Inf {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -260,7 +260,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("export class Sub extends Test<String, Number, Number> implements Inf, Inf2<Number, Number> {");
+      expectedTS.AppendLine("export class Sub extends Test<string, number, number> implements Inf, Inf2<number, number> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

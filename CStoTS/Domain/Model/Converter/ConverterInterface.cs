@@ -40,7 +40,7 @@ namespace CStoTS.Domain.Model.Converter
       if (item.GenericTypes.Any())
       {
         result.Append("<");
-        result.Append(string.Join(",", item.GenericTypes.Select(typeItem => GetTypeScriptType(typeItem))));
+        result.Append(string.Join(", ", item.GenericTypes.Select(typeItem => GetTypeScriptType(typeItem))));
         result.Append(">");
       }
 
@@ -60,7 +60,7 @@ namespace CStoTS.Domain.Model.Converter
           interfaceList.Add(interfaceItem);
         }
 
-        result.Append($" implements {string.Join(",", interfaceList)}");
+        result.Append($" implements {string.Join(", ", interfaceList)}");
       }
 
       result.AppendLine(" {");

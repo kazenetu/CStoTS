@@ -192,7 +192,7 @@ namespace CStoTSTest
       expectedTS.AppendLine(" * @template U B");
       expectedTS.AppendLine(" * @template V C");
       expectedTS.AppendLine(" */");
-      expectedTS.AppendLine("export class Test<T,U,V> {");
+      expectedTS.AppendLine("export class Test<T, U, V> {");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

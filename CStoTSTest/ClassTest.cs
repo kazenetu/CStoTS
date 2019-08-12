@@ -238,7 +238,7 @@ namespace CStoTSTest
       @"public interface Inf
       {
       }");
-      CreateFileData("interface.cs", string.Empty,
+      CreateFileData("interface2.cs", string.Empty,
       @"public interface Inf2<T, V>
       {
       }");

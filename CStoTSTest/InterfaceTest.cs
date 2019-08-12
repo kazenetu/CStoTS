@@ -7,7 +7,7 @@ namespace CStoTSTest
   [Trait("インターフェースのテスト", nameof(InterfaceTest))]
   public class InterfaceTest : TestBase
   {
-    [Fact]
+    [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
       // C#ソース作成
@@ -30,7 +30,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
       // C#ソース作成
@@ -53,7 +53,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenericsSubFixedTypeTest")]
     public void GenericsSubFixedTypeTest()
     {
       // C#ソース作成
@@ -80,8 +80,8 @@ namespace CStoTSTest
 
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
-    
-    [Fact]
+
+    [Fact(DisplayName = "ProtectedScopeTest")]
     public void ProtectedScopeTest()
     {
       // C#ソース作成
@@ -104,7 +104,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "InternalScopeTest")]
     public void InternalScopeTest()
     {
       // C#ソース作成
@@ -127,7 +127,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "PrivateScopeTest")]
     public void PrivateScopeTest()
     {
       // C#ソース作成
@@ -150,7 +150,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "NotExitsScopeTest")]
     public void NotExitsScopeTest()
     {
       // C#ソース作成

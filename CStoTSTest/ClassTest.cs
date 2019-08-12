@@ -7,7 +7,7 @@ namespace CStoTSTest
   [Trait("クラスのテスト", nameof(ClassTest))]
   public class ClassTest : TestBase
   {
-    [Fact]
+    [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
       // C#ソース作成
@@ -30,7 +30,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {
       // C#ソース作成
@@ -57,7 +57,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "SubClassTest")]
     public void SubClassTest()
     {
       // C#ソース作成
@@ -84,7 +84,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
       // C#ソース作成
@@ -107,7 +107,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenericsSubTest")]
     public void GenericsSubTest()
     {
       // C#ソース作成
@@ -134,7 +134,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "GenericsSubFixedTypeTest")]
     public void GenericsSubFixedTypeTest()
     {
       // C#ソース作成
@@ -162,7 +162,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "CommentTest")]
     public void CommentTest()
     {
       // C#ソース作成
@@ -198,7 +198,7 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-    [Fact]
+    [Fact(DisplayName = "InterfaceTest")]
     public void InterfaceTest()
     {
       // C#ソース作成

@@ -66,6 +66,8 @@ namespace CStoTS.Domain.Model.Converter
         case "decimal":
         case "long":
           return "Number";
+        case ",":
+          return ", ";
       }
 
       return src;

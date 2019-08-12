@@ -51,6 +51,21 @@ namespace CStoTS.Domain.Model.Converter
     }
 
     /// <summary>
+    /// C#の型情報をTypeScriptに変換
+    /// </summary>
+    /// <param name="expressions">C#の型情報</param>
+    /// <returns>TypeScriptの型情報</returns>
+    protected string ExpressionsToString(List<IExpression> expressions)
+    {
+      var result = new StringBuilder();
+      foreach (var exp in expressions)
+      {
+        result.Append(GetTypeScriptType(exp.Name));
+      }
+      return result.ToString();
+    }
+
+    /// <summary>
     /// 型のTypeScript変換
     /// </summary>
     /// <param name="src">C#用型</param>

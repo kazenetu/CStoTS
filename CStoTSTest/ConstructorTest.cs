@@ -99,6 +99,42 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    [Fact(DisplayName = "SubClassExistsParamTest")]
+    public void SubClassExistsParamTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test
+      {
+        public Test(int param1)
+        {
+        }
+      }");
+      CreateFileData("sub.cs", string.Empty,
+      @"public class Sub:Test
+      {
+        public Sub():base(1)
+        {
+        }
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("  constructor() {");
+      expectedTS.AppendLine("    base(1);");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
     [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {

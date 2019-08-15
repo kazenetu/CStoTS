@@ -20,6 +20,7 @@ namespace CStoTS.Domain.Model
     {
       {typeof(IItemInterface), ()=>new ConverterInterface() },
       {typeof(IItemClass), ()=>new ConverterClass() },
+      {typeof(IItemConstructor), ()=>new ConvertConstructor() },
     };
 
     /// <summary>

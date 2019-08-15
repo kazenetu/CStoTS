@@ -55,7 +55,7 @@ namespace CStoTS.Domain.Model.Converter
           result.Append($"{GetScope(item)}class {item.Name}{GetClassInfo(item)}");
           break;
         case ClassType.Inner:
-          result.Append($"public static {item.Name} = class{GetClassInfo(item)}");
+          result.Append($"public static {item.Name} = class {item.Name}{GetClassInfo(item)}");
           break;
       }
       result.AppendLine(" {");

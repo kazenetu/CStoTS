@@ -50,7 +50,7 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  public static Inner = class {");
+      expectedTS.AppendLine("  public static Inner = class Inner {");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

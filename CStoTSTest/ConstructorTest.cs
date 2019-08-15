@@ -164,7 +164,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  constructor() {");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  public static Inner = class {");
+      expectedTS.AppendLine("  public static Inner = class Inner {");
       expectedTS.AppendLine("    constructor() {");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("  }");

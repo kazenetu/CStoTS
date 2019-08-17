@@ -182,29 +182,5 @@ namespace CStoTS.Domain.Model.Converter
       return result.ToString();
     }
 
-    /// <summary>
-    /// 条件用文字列取得
-    /// </summary>
-    /// <param name="paramIndex">パラメータ番号(1～)</param>
-    /// <param name="targetType">TypeScriptの型</param>
-    /// <returns>条件用文字列</returns>
-    protected string GetCondition(int paramIndex, string targetType) {
-      var paramName = $"param{paramIndex}";
-      switch (targetType)
-      {
-        case "string":
-        case "number":
-        case "bigint":
-        case "boolean":
-        case "symbol":
-        case "object":
-        case "function":
-          return $"typeof {paramName} === '{targetType}'";
-        case "undefined":
-          return $"{paramName} === {targetType}";
-      }
-      return $"{paramName} instanceof {targetType}";
-    }
   }
-
 }

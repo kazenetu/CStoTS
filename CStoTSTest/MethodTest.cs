@@ -278,7 +278,7 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  public Method<T>(param:T): void {");
+      expectedTS.AppendLine("  public Method<T>(param1: T): void {");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

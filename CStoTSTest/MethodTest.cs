@@ -68,9 +68,9 @@ namespace CStoTSTest
     {
       // C#ソース作成
       CreateFileData("test.cs", string.Empty,
-      @"protected class Test
+      @"public class Test
       {
-        private void Method()
+        protected void Method()
         {
         }
       }");

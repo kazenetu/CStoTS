@@ -1,4 +1,5 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
+using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -35,19 +36,35 @@ namespace CStoTS.Domain.Model.Converter
     /// <returns>TypeScript用スコープ</returns>
     protected string GetScope(IAnalyzeItem item)
     {
+      // class/interfaceのexport判定
+      if (item is IItemClass || item is IItemInterface)
+      {
+        if (item.Modifiers.Where(modifier => modifier != "private").Any())
+        {
+          return "export ";
+        }
+        return string.Empty;
+      }
+
+      // そのほかの要素
+      var resultItems = new List<string>();
       foreach (var scope in item.Modifiers)
       {
         switch(scope){
           case "private":
-          // 追加項目なし
+          case "protected":
+          case "public":
+            resultItems.Add(scope);
             break;
-
-          default:
-            return "export ";
         }
       }
 
-      return string.Empty;
+      var result = string.Join(" ", resultItems);
+      if (resultItems.Any())
+      {
+        result += " ";
+      }
+      return result;
     }
 
     /// <summary>

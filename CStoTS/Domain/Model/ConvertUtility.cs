@@ -22,6 +22,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemClass), ()=>new ConverterClass() },
       {typeof(IItemConstructor), ()=>new ConvertConstructor() },
       {typeof(IItemMethod), ()=>new ConvertMethod() },
+      {typeof(IItemField), ()=>new ConvertField() },
     };
 
     /// <summary>

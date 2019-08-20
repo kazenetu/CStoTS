@@ -9,8 +9,13 @@ C#をTypeScriptに変換
 git clone --recursive https://github.com/kazenetu/CStoTS.git
 ```
 
+## pull方法
+依存ライブラリが更新している可能性があるため下記の方法でpullする  
+```sh
+git pull --recurse-submodules
+```
+
 ## テスト方法
-※前提: clone先にディレクトリ移動済み
 * VisualStudio(2017以上)を利用する場合  
   ```CStoTSTest.sln```を開いてテストを行う
 * dotnetコマンドを利用する場合

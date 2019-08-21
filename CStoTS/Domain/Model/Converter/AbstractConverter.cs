@@ -78,6 +78,10 @@ namespace CStoTS.Domain.Model.Converter
       foreach (var exp in expressions)
       {
         result.Append(GetTypeScriptType(exp.Name));
+        if(exp.TypeName == "Instance")
+        {
+          result.Append(" ");
+        }
       }
       return result.ToString();
     }

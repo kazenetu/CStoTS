@@ -4,7 +4,7 @@ using Xunit;
 
 namespace CStoTSTest
 {
-  [Trait("コンストラクタのテスト", nameof(MethodTest))]
+  [Trait("メソッドのテスト", nameof(MethodTest))]
   public class MethodTest : TestBase
   {
     [Fact(DisplayName = "StandardTest")]

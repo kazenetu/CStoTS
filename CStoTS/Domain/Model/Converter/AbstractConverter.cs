@@ -154,7 +154,13 @@ namespace CStoTS.Domain.Model.Converter
         return string.Empty;
       }
 
-      // コメント情報を一行にする
+      // 1行コメント
+      if (item.Comments.Count() == 1)
+      {
+        return $"{indentSpace}{item.Comments.First()}{Environment.NewLine}";
+      }
+
+      // 複数コメント：コメント情報を一行にする
       var sb = new StringBuilder();
       foreach (var itemComment in item.Comments)
       {

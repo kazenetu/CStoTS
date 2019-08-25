@@ -49,17 +49,12 @@ namespace CStoTS.Domain.Model.Converter
         var interfaceList = new List<string>();
         foreach (var targetItemList in item.Interfaces)
         {
-          // パスを含むインターフェース名格納
-          var interfaceItem = string.Empty;
-          foreach (var targetItem in targetItemList)
-          {
-            interfaceItem += GetTypeScriptType(targetItem.Name);
-          }
           // インターフェース名追加
-          interfaceList.Add(interfaceItem);
+          interfaceList.Add(ExpressionsToString(targetItemList));
         }
 
-        result.Append($" implements {string.Join(", ", interfaceList)}");
+        result.Append(" implements ");
+        result.Append(string.Join(", ", interfaceList.Select(typeItem => GetTypeScriptType(typeItem))));
       }
 
       result.AppendLine(" {");

@@ -22,8 +22,6 @@ namespace CStoTS.Domain.Model.Converter
       "-",
       "*",
       "/",
-      "++",
-      "--",
     };
 
     /// <summary>
@@ -34,8 +32,6 @@ namespace CStoTS.Domain.Model.Converter
       "-",
       "*",
       "/",
-      "++",
-      "--",
       "new",
       ",",
     };

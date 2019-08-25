@@ -18,8 +18,8 @@ namespace CStoTS.Domain.Model
     /// </summary>
     private static Dictionary<Type, Func<IConvertable>> table = new Dictionary<Type, Func<IConvertable>>()
     {
-      {typeof(IItemInterface), ()=>new ConverterInterface() },
-      {typeof(IItemClass), ()=>new ConverterClass() },
+      {typeof(IItemInterface), ()=>new ConvertInterface() },
+      {typeof(IItemClass), ()=>new ConvertClass() },
       {typeof(IItemConstructor), ()=>new ConvertConstructor() },
       {typeof(IItemMethod), ()=>new ConvertMethod() },
       {typeof(IItemField), ()=>new ConvertField() },

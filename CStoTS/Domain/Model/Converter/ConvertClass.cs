@@ -10,7 +10,7 @@ namespace CStoTS.Domain.Model.Converter
   /// <summary>
   /// TS変換クラス：class
   /// </summary>
-  internal class ConverterClass : AbstractConverter, IConvertable
+  internal class ConvertClass : AbstractConverter, IConvertable
   {
     /// <summary>
     /// クラスタイプ

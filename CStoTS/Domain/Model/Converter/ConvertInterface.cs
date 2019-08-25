@@ -10,7 +10,7 @@ namespace CStoTS.Domain.Model.Converter
   /// <summary>
   /// TS変換クラス：interface
   /// </summary>
-  internal class ConverterInterface : AbstractConverter, IConvertable
+  internal class ConvertInterface : AbstractConverter, IConvertable
   {
     /// <summary>
     /// エントリメソッド

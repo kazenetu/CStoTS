@@ -15,6 +15,32 @@ namespace CStoTS.Domain.Model.Converter
   internal abstract class AbstractConverter
   {
     /// <summary>
+    /// 前スペースを置くキーワード
+    /// </summary>
+    private List<string> beforeSpaceKeywords = new List<string>() {
+      "+",
+      "-",
+      "*",
+      "/",
+      "++",
+      "--",
+    };
+
+    /// <summary>
+    /// 後スペースを置くキーワード
+    /// </summary>
+    private List<string> afterSpaceKeywords = new List<string>() {
+      "+",
+      "-",
+      "*",
+      "/",
+      "++",
+      "--",
+      "new",
+      ",",
+    };
+
+    /// <summary>
     /// インデントスペース取得
     /// </summary>
     /// <param name="indentSpace">インデント数</param>
@@ -77,8 +103,16 @@ namespace CStoTS.Domain.Model.Converter
       var result = new StringBuilder();
       foreach (var exp in expressions)
       {
+        // 前スペースの代入
+        if (beforeSpaceKeywords.Contains(exp.Name))
+        {
+          result.Append(" ");
+        }
+
         result.Append(GetTypeScriptType(exp.Name));
-        if(exp.TypeName == "Instance")
+
+        // 後ろスペースの代入
+        if (afterSpaceKeywords.Contains(exp.Name))
         {
           result.Append(" ");
         }
@@ -102,8 +136,6 @@ namespace CStoTS.Domain.Model.Converter
         case "decimal":
         case "long":
           return "number";
-        case ",":
-          return ", ";
       }
 
       return src;

@@ -31,8 +31,10 @@ namespace CStoTS.Domain.Model
     /// C#解析結果からTS変換変換結果を返す
     /// </summary>
     /// <param name="csItem">C#解析結果</param>
+    /// <param name="indent">インデント数</param>
+    /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    public static string Convert(IAnalyzeItem csItem, int indent)
+    public static string Convert(IAnalyzeItem csItem, int indent, List<string> otherScripts)
     {
       // 対象リストからC#解析結果に該当するTS変換クラスを抽出
       var query = table.Where(item => item.Key.IsInstanceOfType(csItem));
@@ -42,7 +44,7 @@ namespace CStoTS.Domain.Model
       }
 
       // 該当したTS変換クラスのインスタンスからTS変換変換結果を返す
-      return query.First().Value().Convert(csItem, indent);
+      return query.First().Value().Convert(csItem, indent, otherScripts);
     }
   }
 }

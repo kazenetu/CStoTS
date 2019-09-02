@@ -17,13 +17,14 @@ namespace CStoTS.Domain.Model.Converter
     /// </summary>
     /// <param name="item">C#解析結果</param>
     /// <param name="indent">インデント数</param>
+    /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    public string Convert(IAnalyzeItem item, int indent)
+    public string Convert(IAnalyzeItem item, int indent, List<string> otherScripts)
     {
-      return Convert(item as IItemInterface, indent);
+      return Convert(item as IItemInterface, indent, otherScripts);
     }
 
-    public string Convert(IItemInterface item, int indent)
+    public string Convert(IItemInterface item, int indent, List<string> otherScripts)
     {
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
@@ -62,7 +63,7 @@ namespace CStoTS.Domain.Model.Converter
       // メンバー追加
       foreach (var member in item.Members)
       {
-        result.Append(ConvertUtility.Convert(member, indent + 1));
+        result.Append(ConvertUtility.Convert(member, indent + 1, otherScripts));
       }
 
       result.AppendLine($"{indentSpace}}}");

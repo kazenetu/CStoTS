@@ -38,10 +38,10 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private field: string;");
       expectedTS.AppendLine("  public set Field(value: string) {");
       expectedTS.AppendLine("    this.field = value;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public get Field(): string {");
       expectedTS.AppendLine("    return this.field;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -69,10 +69,10 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private _Field_: string;");
       expectedTS.AppendLine("  public set Field(value: string) {");
       expectedTS.AppendLine("    this._Field_ = value;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public get Field(): string {");
       expectedTS.AppendLine("    return this._Field_;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -100,10 +100,10 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private _Field_: string;");
       expectedTS.AppendLine("  public set Field(value: string) {");
       expectedTS.AppendLine("    this._Field_ = value;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public get Field(): string {");
       expectedTS.AppendLine("    return this._Field_;");
-      expectedTS.AppendLine("  };");
+      expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

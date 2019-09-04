@@ -178,7 +178,10 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  public static Inner = class Inner {");
+      expectedTS.AppendLine("}");
+
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export class Inner {");
       expectedTS.AppendLine("    public Method(): void {");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("  }");

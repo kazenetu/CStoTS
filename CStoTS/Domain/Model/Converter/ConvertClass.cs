@@ -42,6 +42,13 @@ namespace CStoTS.Domain.Model.Converter
     private string Convert(IItemClass item, int indent, List<string> otherScripts)
     {
       var result = new StringBuilder();
+      var classType = GetClassType(item);
+
+      // 内部クラスの場合はインデント固定
+      if (classType == ClassType.Inner)
+      {
+        indent = 1;
+      }
       var indentSpace = GetIndentSpace(indent);
 
       // クラスコメント
@@ -49,13 +56,13 @@ namespace CStoTS.Domain.Model.Converter
 
       // クラス定義
       result.Append(indentSpace);
-      switch (GetClassType(item))
+      switch (classType)
       { 
         case ClassType.Normal:
           result.Append($"{GetScope(item)}class {item.Name}{GetClassInfo(item)}");
           break;
         case ClassType.Inner:
-          result.Append($"public static {item.Name} = class {item.Name}{GetClassInfo(item)}");
+          result.Append($"export class {item.Name}{GetClassInfo(item)}");
           break;
       }
       result.AppendLine(" {");
@@ -67,7 +74,38 @@ namespace CStoTS.Domain.Model.Converter
 
       result.AppendLine($"{indentSpace}}}");
 
+      // 内部クラスの場合はotherScriptsに格納
+      if (classType == ClassType.Inner)
+      {
+        otherScripts.Add($"export namespace {GetParentClessName(item)} {{");
+        otherScripts.Add($"{result.ToString()}}}");
+        otherScripts.Add($"");
+
+        // 親クラスのメンバーに含めない
+        result.Clear();
+      }
+
       return result.ToString();
+    }
+
+    /// <summary>
+    /// 親クラスのパスを取得する
+    /// </summary>
+    /// <param name="item">内部クラスのインスタンス</param>
+    /// <returns>親クラスのパス</returns>
+    private string GetParentClessName(IItemClass item)
+    {
+      var result = new List<string>();
+
+      // 親クラスをさかのぼりながら格納する
+      var parent = item.Parent as IItemClass;
+      while(parent != null)
+      {
+        result.Add(parent.Name);
+        parent = parent.Parent as IItemClass;
+      }
+
+      return string.Join(".", result);
     }
 
     /// <summary>

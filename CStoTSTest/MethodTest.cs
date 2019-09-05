@@ -288,5 +288,33 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    [Fact(DisplayName = "StaticTest")]
+    public void StaticTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test
+      {
+        public static void Method()
+        {
+        }
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  public static Method(): void {");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
   }
 }

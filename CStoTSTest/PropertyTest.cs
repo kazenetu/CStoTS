@@ -109,5 +109,36 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    [Fact(DisplayName = "StaticTest")]
+    public void StaticTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test
+      {
+        public static string Field { set; get; }
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  private static _Field_: string;");
+      expectedTS.AppendLine("  public static set Field(value: string) {");
+      expectedTS.AppendLine("    Test._Field_ = value;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("  public static get Field(): string {");
+      expectedTS.AppendLine("    return Test._Field_;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
   }
 }

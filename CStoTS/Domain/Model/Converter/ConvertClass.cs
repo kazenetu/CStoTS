@@ -89,26 +89,6 @@ namespace CStoTS.Domain.Model.Converter
     }
 
     /// <summary>
-    /// 親クラスのパスを取得する
-    /// </summary>
-    /// <param name="item">内部クラスのインスタンス</param>
-    /// <returns>親クラスのパス</returns>
-    private string GetParentClessName(IItemClass item)
-    {
-      var result = new List<string>();
-
-      // 親クラスをさかのぼりながら格納する
-      var parent = item.Parent as IItemClass;
-      while(parent != null)
-      {
-        result.Add(parent.Name);
-        parent = parent.Parent as IItemClass;
-      }
-
-      return string.Join(".", result);
-    }
-
-    /// <summary>
     /// クラスタイプの取得
     /// </summary>
     /// <param name="item">C#解析結果</param>

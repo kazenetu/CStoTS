@@ -147,7 +147,7 @@ namespace CStoTS.Domain.Model.Converter
       var result = new List<string>();
 
       // 親クラスをさかのぼりながら格納する
-      var parent = item.Parent as IItemClass;
+      var parent = item?.Parent as IItemClass;
       while (parent != null)
       {
         result.Add(parent.Name);

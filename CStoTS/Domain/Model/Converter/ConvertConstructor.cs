@@ -75,8 +75,12 @@ namespace CStoTS.Domain.Model.Converter
       }
 
       // 定義
-      var scope = string.Empty;
-      if(isOverload){
+      var scope = GetScope(item);
+      if (scope == "public ")
+      {
+        scope = string.Empty;
+      }
+      if (isOverload){
         scope = "private ";
       }
       result.Append($"{indentSpace}{scope}{BaseMethodName}{indexValue}");
@@ -161,7 +165,12 @@ namespace CStoTS.Domain.Model.Converter
         }
 
         // 総合メソッドの作成
-        result.Append($"{indentSpace}{BaseMethodName}(");
+        scope = GetScope(item);
+        if (scope == "public ")
+        {
+          scope = string.Empty;
+        }
+        result.Append($"{indentSpace}{scope}{BaseMethodName}(");
         for (var index = 1; index <= maxParamCount; index++)
         {
           if (index > 1)

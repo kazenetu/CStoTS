@@ -1,6 +1,7 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -37,10 +38,27 @@ namespace CStoTS.Domain.Model.Converter
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
 
+      // static用スコープとプロパティ内の参照名
+      var staticScope = string.Empty;
+      var refTarget = "this";
+      if (item.Modifiers.Contains("static"))
+      {
+        // スコープ設定
+        staticScope += "static ";
+
+        // 参照名設定
+        var itemClass = item.Parent as IItemClass;
+        refTarget = GetParentClessName(itemClass);
+        if (string.IsNullOrEmpty(refTarget))
+        {
+          refTarget = itemClass.Name;
+        }
+      }
+
       // アクセサのメンバー確認とフィールドの作成
       if (item.AccessorList.Where(accessor => accessor.Members.Count() == 0).Any())
       {
-        result.Append($"{indentSpace}private _{item.Name}_: {ExpressionsToString(item.PropertyTypes)}");
+        result.Append($"{indentSpace}private {staticScope}_{item.Name}_: {ExpressionsToString(item.PropertyTypes)}");
 
         // デフォルト設定
         if (item.DefaultValues.Any())
@@ -54,12 +72,12 @@ namespace CStoTS.Domain.Model.Converter
       var comment = GetTypeScriptComments(item, indentSpace);
 
       // 定義
-      var scope = GetScope(item);
+      var scope = GetScope(item) + staticScope;
       var propertyType = ExpressionsToString(item.PropertyTypes);
       foreach (var accessor in item.AccessorList)
       {
         result.Append(comment);
-        result.Append(GetAccessorString(accessor, indent, scope, item.Name, propertyType, otherScripts));
+        result.Append(GetAccessorString(accessor, indent, scope, item.Name, propertyType, refTarget, otherScripts));
       }
 
       return result.ToString();
@@ -73,9 +91,10 @@ namespace CStoTS.Domain.Model.Converter
     /// <param name="scope">スコープ名</param>
     /// <param name="propertyName">プロパティ名</param>
     /// <param name="propertyType">プロパティの型</param>
+    /// <param name="refTarget">参照名(インスタンス参照の場合はthis)</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>set/get用Typescriptの文字列</returns>
-    private string GetAccessorString(IAnalyzeItem accessorItem, int indent, string scope, string propertyName, string propertyType, List<string> otherScripts)
+    private string GetAccessorString(IAnalyzeItem accessorItem, int indent, string scope, string propertyName, string propertyType,string refTarget, List<string> otherScripts)
     {
       var indentSpace = GetIndentSpace(indent);
 
@@ -93,7 +112,7 @@ namespace CStoTS.Domain.Model.Converter
           result.AppendLine($"{indentSpace}{scope}set {propertyName}(value: {propertyType}) {{");
 
           if(notExistsMember){
-            result.AppendLine($"{GetIndentSpace(indent + 1)}this._{propertyName}_ = value;");
+            result.AppendLine($"{GetIndentSpace(indent + 1)}{refTarget}._{propertyName}_ = value;");
           }
           break;
 
@@ -102,7 +121,7 @@ namespace CStoTS.Domain.Model.Converter
 
           if (notExistsMember)
           {
-            result.AppendLine($"{GetIndentSpace(indent + 1)}return this._{propertyName}_;");
+            result.AppendLine($"{GetIndentSpace(indent + 1)}return {refTarget}._{propertyName}_;");
           }
           break;
 

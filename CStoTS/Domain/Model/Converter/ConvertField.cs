@@ -41,6 +41,9 @@ namespace CStoTS.Domain.Model.Converter
 
       // 定義
       var scope = GetScope(item);
+      if (item.Modifiers.Contains("static")){
+        scope += "static ";
+      }
       result.Append($"{indentSpace}{scope}{item.Name}");
       result.Append($": {ExpressionsToString(item.FieldTypes)}");
 

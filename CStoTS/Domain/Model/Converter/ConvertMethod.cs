@@ -79,6 +79,11 @@ namespace CStoTS.Domain.Model.Converter
       {
         scope = "private ";
       }
+      if (item.Modifiers.Contains("static"))
+      {
+        scope += "static ";
+      }
+
       result.Append($"{indentSpace}{scope}{BaseMethodName}{indexValue}");
       // ジェネリックスクラス
       if (item.GenericTypes.Any())

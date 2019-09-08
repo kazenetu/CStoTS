@@ -75,6 +75,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test<T, U, V> } from 'test';");
+      expectedTS.AppendLine("");
       expectedTS.AppendLine("export interface Sub implements Test<string, number, number> {");
       expectedTS.AppendLine("}");
 

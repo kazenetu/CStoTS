@@ -90,6 +90,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from 'test';");
+      expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("  constructor() {");
       expectedTS.AppendLine("    base();");
@@ -126,6 +128,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from 'test';");
+      expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("  constructor() {");
       expectedTS.AppendLine("    base(1);");

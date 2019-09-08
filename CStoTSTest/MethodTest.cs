@@ -146,6 +146,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from 'test';");
+      expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("  public Method(): void {");
       expectedTS.AppendLine("  }");

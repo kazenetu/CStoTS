@@ -23,3 +23,9 @@ git pull --recurse-submodules
   #CStoTSTest/CStoTSTest.csprojのテストを実施
   dotnet test ./CStoTSTest/CStoTSTest.csproj
   ```
+
+## TODO
+* [ ] import(外部参照)のテストと実装を追加
+* [ ] JSONシリアライズ/デシリアライズクラスの作成
+* [ ] プロパティのみ出力フラグの機能追加(I/F用クラス)
+

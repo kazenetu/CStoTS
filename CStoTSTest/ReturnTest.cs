@@ -150,7 +150,7 @@ namespace CStoTSTest
       @"public class Test
       {
         private string field1;
-        public MyClass Method()
+        public string Method()
         {
           return field1;
         }
@@ -166,7 +166,7 @@ namespace CStoTSTest
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  private field1: string;");
-      expectedTS.AppendLine("  public Method(): MyClass {");
+      expectedTS.AppendLine("  public Method(): string {");
       expectedTS.AppendLine("    return this.field1;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");

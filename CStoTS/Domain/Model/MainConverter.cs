@@ -18,6 +18,16 @@ namespace CStoTS.Domain.Model
       // C#解析結果を取得
       var targetItem = analyzed.FileRoot.Members.First();
 
+      // 外部ファイル参照を設定
+      var importStrings = analyzed.FileRoot.OtherFiles.
+            OrderBy(item => item.Key).
+            Select(item => $"import {{ {item.Key} }} from '{item.Value.Replace(".cs",string.Empty,StringComparison.CurrentCulture)}';");
+
+      if(importStrings.Any()){
+        result.Append(string.Join(Environment.NewLine, importStrings));
+        result.AppendLine(Environment.NewLine);
+      }
+
       // TS変換変換結果を取得
       var otherScripts = new List<string>();
       result.Append(ConvertUtility.Convert(targetItem, 0, otherScripts));

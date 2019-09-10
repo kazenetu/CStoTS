@@ -27,6 +27,7 @@ git pull --recurse-submodules
 ## TODO
 * [X] import(外部参照)のテストと実装を追加
 * [ ] 階層構造のあるimport(外部参照)のテストと実装を追加
-* [ ] JSONシリアライズ/デシリアライズクラスの作成
+* [ ] 固定出力のTypeScriptファイルの格納場所の確定
+* [ ] JSONシリアライズ/デシリアライズTypeScriptの作成
 * [ ] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
 

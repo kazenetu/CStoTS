@@ -15,9 +15,6 @@ namespace CStoTS.Domain.Model
     {
       var result = new StringBuilder();
 
-      // C#解析結果を取得
-      var targetItem = analyzed.FileRoot.Members.First();
-
       // 外部ファイル参照を設定
       var importStrings = analyzed.FileRoot.OtherFiles.
             OrderBy(item => item.Key).
@@ -28,10 +25,15 @@ namespace CStoTS.Domain.Model
         result.AppendLine(Environment.NewLine);
       }
 
+      // C#解析結果を取得
+      var targetItems = analyzed.FileRoot.Members;
+
       // TS変換変換結果を取得
-      var otherScripts = new List<string>();
-      result.Append(ConvertUtility.Convert(targetItem, 0, otherScripts));
-      result.Append(string.Join(Environment.NewLine, otherScripts));
+      foreach(var targetItem in targetItems){
+        var otherScripts = new List<string>();
+        result.Append(ConvertUtility.Convert(targetItem, 0, otherScripts));
+        result.Append(string.Join(Environment.NewLine, otherScripts));
+      }
 
       // 変換結果を返す
       return result.ToString();

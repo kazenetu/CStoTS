@@ -208,7 +208,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("import { Dictionary } from 'Dictionary';");
       expectedTS.AppendLine("import { List } from 'List';");
       expectedTS.AppendLine("");
-      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  private field1: List<string>;");
       expectedTS.AppendLine("  private field2: Dictionary<number, string>;");
       expectedTS.AppendLine("}");

@@ -15,16 +15,52 @@ namespace CStoTS.Domain.Model
     {
       var result = new StringBuilder();
 
-      // 外部ファイル参照を設定
+      // 対象ファイルのディレクトリのリストを取得
       var thisDirectory = GetDerectoryList(analyzed.FilePath);
-      var importStrings = analyzed.FileRoot.OtherFiles.
-            OrderBy(item => item.Key).
-            Select(item => $"import {{ {item.Key} }} from '{GetRelativePath(item.Value, thisDirectory).Replace(".cs", string.Empty, StringComparison.CurrentCulture)}';");
 
-      if(importStrings.Any()){
-        result.Append(string.Join(Environment.NewLine, importStrings));
+      // 外部ファイル参照を組み立て
+      var importFileKeys = new Dictionary<string, List<string>>();
+      foreach (var importString in analyzed.FileRoot.OtherFiles)
+      {
+        // ファイルパス取得
+        var filePath = importString.Value;
+        if(string.IsNullOrEmpty(filePath)){
+          // ファイルパスがない場合は定義済みTSクラス(ファイル出力)
+          filePath = importString.Key;
+        }
+
+        // ファイルパスを現地点からの相対パスに変換
+        filePath = GetRelativePath(filePath, thisDirectory).Replace(".cs", string.Empty, StringComparison.CurrentCulture);
+
+        // キー名確認とリスト生成
+        if (!importFileKeys.ContainsKey(filePath))
+        {
+          importFileKeys.Add(filePath, new List<string>());
+        }
+
+        // TSクラス名を追加
+        importFileKeys[filePath].Add(importString.Key);
+      }
+
+      // 外部ファイル参照設定
+      if (importFileKeys.Any())
+      {
+        result.Append(string.Join(Environment.NewLine, importFileKeys.OrderBy(item => item.Key).Select(item => $"import {{ {string.Join(", ", item.Value)} }} from '{item.Key}';")));
         result.AppendLine(Environment.NewLine);
       }
+
+      //foreach(var importString in importStrings)
+      //{
+      //  // 組み込みクラス：TypeScriptファイル出力：ファイル名が存在しない
+      //  if(string.IsNullOrEmpty(importString.Value)){
+      //    result.AppendLine($"import {{ {importString.Key} }} from '{GetRelativePath(importString.Key, thisDirectory).Replace(".cs", string.Empty, StringComparison.CurrentCulture)}';");
+      //  }
+      //}
+
+      //if (importStrings.Any()){
+      //  result.Append(string.Join(Environment.NewLine, importStrings));
+      //  result.AppendLine(Environment.NewLine);
+      //}
 
       // C#解析結果を取得
       var targetItems = analyzed.FileRoot.Members;

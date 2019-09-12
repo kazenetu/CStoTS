@@ -49,19 +49,6 @@ namespace CStoTS.Domain.Model
         result.AppendLine(Environment.NewLine);
       }
 
-      //foreach(var importString in importStrings)
-      //{
-      //  // 組み込みクラス：TypeScriptファイル出力：ファイル名が存在しない
-      //  if(string.IsNullOrEmpty(importString.Value)){
-      //    result.AppendLine($"import {{ {importString.Key} }} from '{GetRelativePath(importString.Key, thisDirectory).Replace(".cs", string.Empty, StringComparison.CurrentCulture)}';");
-      //  }
-      //}
-
-      //if (importStrings.Any()){
-      //  result.Append(string.Join(Environment.NewLine, importStrings));
-      //  result.AppendLine(Environment.NewLine);
-      //}
-
       // C#解析結果を取得
       var targetItems = analyzed.FileRoot.Members;
 

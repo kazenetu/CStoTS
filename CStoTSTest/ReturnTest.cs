@@ -92,7 +92,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { MyClass } from 'myclass';");
+      expectedTS.AppendLine("import { MyClass } from './myclass';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): MyClass {");
@@ -131,7 +131,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { MyClass } from 'myclass';");
+      expectedTS.AppendLine("import { MyClass } from './myclass';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): MyClass {");

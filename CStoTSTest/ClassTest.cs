@@ -81,7 +81,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test } from 'test';");
+      expectedTS.AppendLine("import { Test } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("}");
@@ -133,7 +133,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test<T> } from 'test';");
+      expectedTS.AppendLine("import { Test<T> } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub<T> extends Test<T> {");
       expectedTS.AppendLine("}");
@@ -163,7 +163,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test<T, U, V> } from 'test';");
+      expectedTS.AppendLine("import { Test<T, U, V> } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test<string, number, number> {");
       expectedTS.AppendLine("}");
@@ -233,8 +233,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Inf } from 'interface';");
-      expectedTS.AppendLine("import { Test<T, U, V> } from 'test';");
+      expectedTS.AppendLine("import { Inf } from './interface';");
+      expectedTS.AppendLine("import { Test<T, U, V> } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test<string, number, number> implements Inf {");
       expectedTS.AppendLine("}");
@@ -272,9 +272,9 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Inf } from 'interface';");
-      expectedTS.AppendLine("import { Inf2<T, V> } from 'interface2';");
-      expectedTS.AppendLine("import { Test<T, U, V> } from 'test';");
+      expectedTS.AppendLine("import { Inf } from './interface';");
+      expectedTS.AppendLine("import { Inf2<T, V> } from './interface2';");
+      expectedTS.AppendLine("import { Test<T, U, V> } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test<string, number, number> implements Inf, Inf2<number, number> {");
       expectedTS.AppendLine("}");

@@ -28,7 +28,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test } from 'test';");
+      expectedTS.AppendLine("import { Test } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("}");
@@ -61,7 +61,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test, MyClass } from 'test';");
+      expectedTS.AppendLine("import { Test, MyClass } from './test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("  private field: MyClass;");
@@ -91,7 +91,7 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Test } from 'base/test';");
+      expectedTS.AppendLine("import { Test } from './base/test';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Sub extends Test {");
       expectedTS.AppendLine("}");
@@ -205,8 +205,8 @@ namespace CStoTSTest
       Assert.NotNull(actualTS);
 
       var expectedTS = new StringBuilder();
-      expectedTS.AppendLine("import { Dictionary } from 'Dictionary';");
-      expectedTS.AppendLine("import { List } from 'List';");
+      expectedTS.AppendLine("import { Dictionary } from './Dictionary';");
+      expectedTS.AppendLine("import { List } from './List';");
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  private field1: List<string>;");

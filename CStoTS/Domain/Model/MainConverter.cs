@@ -39,7 +39,13 @@ namespace CStoTS.Domain.Model
         }
 
         // TSクラス名を追加
-        importFileKeys[filePath].Add(importString.Key);
+        var tsClassName = importString.Key;
+        var dotIndex = tsClassName.IndexOf(".", StringComparison.CurrentCulture);
+        if (dotIndex > 0)
+        {
+          tsClassName = tsClassName.Substring(0, dotIndex);
+        }
+        importFileKeys[filePath].Add(tsClassName);
       }
 
       // 外部ファイル参照設定

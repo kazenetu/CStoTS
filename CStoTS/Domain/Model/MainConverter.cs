@@ -91,7 +91,7 @@ namespace CStoTS.Domain.Model
     {
       // 現在のディレクトリがルートの場合はそのまま出力
       if(!thisDirectory.Any()){
-        return targetFilePath;
+        return $"./{targetFilePath}";
       }
 
       // 対象のディレクトリリストを取得
@@ -124,9 +124,11 @@ namespace CStoTS.Domain.Model
       }
 
       var result = relativePath.ToString() + targetFilePath;
-      if(result.StartsWith("/",StringComparison.CurrentCulture)){
+      if (result.StartsWith("/", StringComparison.CurrentCulture))
+      {
         result = ".." + result;
       }
+
       return result;
     }
 

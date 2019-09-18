@@ -17,4 +17,16 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.0.0" />
     <PackageReference Include="Microsoft.NetCore.Analyzers" Version="2.9.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Infrastructure\TypeScripts\Dictionary.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Infrastructure\TypeScripts\JSONConverter.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Infrastructure\TypeScripts\List.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

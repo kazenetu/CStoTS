@@ -15,10 +15,16 @@ export class JSONConverter<T>
     for (let itemName in jsonObject) {
       let itemObject = jsonObject[itemName];
 
+      // プロパティ用フィールドの存在確認と対象名の再設定
+      let newInstanceItemName = itemName;
+      if (newInstance.hasOwnProperty("_" + itemName + "_")) {
+        newInstanceItemName = "_" + itemName + "_";
+      }
+
       if (typeof itemObject === 'object') {
-        this.deserializeMapping(newInstance[itemName], itemObject);
+        this.deserializeMapping(newInstance[newInstanceItemName], itemObject);
       } else {
-        newInstance[itemName] = jsonObject[itemName];
+        newInstance[newInstanceItemName] = jsonObject[itemName];
       }
     }
     return newInstance;

@@ -27,6 +27,10 @@ namespace CStoTS.Domain.Service
 
       // Run C# Analyze
       csApplication.Analyze(inputCSRoot, inputRepository);
+
+      // output fixed TypeScript files
+      outputRepository.OutputFixedTypeScripts(outputTSRoot);
+
     }
   }
 }

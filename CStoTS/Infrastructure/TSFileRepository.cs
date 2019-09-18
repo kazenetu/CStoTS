@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace CStoTS.Infrastructure
@@ -18,6 +19,20 @@ namespace CStoTS.Infrastructure
       using (var sw = new StreamWriter(filePath, false, Encoding.UTF8))
       {
         sw.Write(tsData);
+      }
+    }
+
+    /// <summary>
+    /// 固定TypeScriptの出力
+    /// </summary>
+    /// <param name="outputTSRoot">出力：TypeScriptのルートパス</param>
+    public void OutputFixedTypeScripts(string outputTSRoot)
+    {
+      // 固定TSクラスをコピー
+      var tsFileNames = new List<string>() { "Dictionary.ts", "List.ts", "JSONConverter.ts" };
+      foreach (var tsFileName in tsFileNames)
+      {
+        File.Copy($"Infrastructure/TypeScripts/{tsFileName}", Path.Combine(outputTSRoot, tsFileName), true);
       }
     }
   }

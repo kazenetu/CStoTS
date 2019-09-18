@@ -22,5 +22,13 @@ namespace CStoTSTest.Common
     {
       Scripts.Add((filePath, tsData));
     }
+
+    /// <summary>
+    /// 固定TypeScriptの出力
+    /// </summary>
+    /// <param name="outputTSRoot">出力：TypeScriptのルートパス</param>
+    public void OutputFixedTypeScripts(string outputTSRoot)
+    {
+    }
   }
 }

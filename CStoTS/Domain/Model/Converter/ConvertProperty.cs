@@ -1,7 +1,6 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;

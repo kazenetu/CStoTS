@@ -66,7 +66,12 @@ namespace CStoTSTest
         {
           return int.Parse(""123"");
         }
+        public int Method3()
+        {
+          return Decimal.Parse(""123"");
+        }
       }");
+
       // 変換
       ConvertTS();
 
@@ -80,6 +85,9 @@ namespace CStoTSTest
       expectedTS.AppendLine("    return \"123\".length;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public Method2(): number {");
+      expectedTS.AppendLine("    return Number(\"123\");");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("  public Method3(): number {");
       expectedTS.AppendLine("    return Number(\"123\");");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");

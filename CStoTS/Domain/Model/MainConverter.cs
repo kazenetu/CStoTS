@@ -11,6 +11,16 @@ namespace CStoTS.Domain.Model
   /// </summary>
   internal class MainConverter
   {
+    private readonly List<string> exclusionImportFiles = new List<string>()
+    {
+      "./String",
+      "./Int",
+      "./Decimal",
+      "./Long",
+      "./Double",
+      "./Float",
+    };
+
     public string ConvertTS(IAnalyzed analyzed, int indent = 0)
     {
       var result = new StringBuilder();
@@ -49,7 +59,7 @@ namespace CStoTS.Domain.Model
       }
 
       // 外部ファイル参照設定
-      var importTargets = importFileKeys.Where(item => item.Key != "./String").OrderBy(item => item.Key);
+      var importTargets = importFileKeys.Where(item => !exclusionImportFiles.Contains(item.Key)).OrderBy(item => item.Key);
       if (importTargets.Any())
       {
         result.Append(string.Join(Environment.NewLine, importTargets.Select(item => $"import {{ {string.Join(", ", item.Value)} }} from '{item.Key}';")));

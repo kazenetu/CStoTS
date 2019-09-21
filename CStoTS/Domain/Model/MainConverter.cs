@@ -49,9 +49,10 @@ namespace CStoTS.Domain.Model
       }
 
       // 外部ファイル参照設定
-      if (importFileKeys.Any())
+      var importTargets = importFileKeys.Where(item => item.Key != "./String").OrderBy(item => item.Key);
+      if (importTargets.Any())
       {
-        result.Append(string.Join(Environment.NewLine, importFileKeys.OrderBy(item => item.Key).Select(item => $"import {{ {string.Join(", ", item.Value)} }} from '{item.Key}';")));
+        result.Append(string.Join(Environment.NewLine, importTargets.Select(item => $"import {{ {string.Join(", ", item.Value)} }} from '{item.Key}';")));
         result.AppendLine(Environment.NewLine);
       }
 

@@ -37,6 +37,18 @@ namespace CStoTS.Domain.Model.Converter
     };
 
     /// <summary>
+    /// C#とTypeScriptの変換リスト
+    /// </summary>
+    /// <remarks>一部C#側はTypeScriptの型に変換済みを考慮</remarks>
+    private readonly Dictionary<string, string> ConvertMethodNames = new Dictionary<string, string>()
+    {
+      {@"\.ToString\(",".toString(" },
+      {@"\.Length",".length" },
+      {@"number\.Parse\(","Number(" },
+      {@"[s|S]tring\.Empty","''" },
+    };
+
+    /// <summary>
     /// インデントスペース取得
     /// </summary>
     /// <param name="indentSpace">インデント数</param>
@@ -113,7 +125,7 @@ namespace CStoTS.Domain.Model.Converter
           result.Append(" ");
         }
       }
-      return result.ToString();
+      return ReplaceMethodNames(result.ToString());
     }
 
     /// <summary>
@@ -136,6 +148,81 @@ namespace CStoTS.Domain.Model.Converter
 
       return src;
     }
+
+    #region メソッド C#→TypeScript変換
+
+    /// <summary>
+    /// メソッドをTypeScript用に置換え
+    /// </summary>
+    /// <param name="src">ソース文字列</param>
+    /// <returns>置き換え後文字列</returns>
+    public string ReplaceMethodNames(string src)
+    {
+      var result = src;
+
+      foreach (var convertMethodName in ConvertMethodNames.Keys)
+      {
+        if (Regex.IsMatch(result, convertMethodName))
+        {
+          result = ReplaceMethod(result, convertMethodName, ConvertMethodNames[convertMethodName]);
+        }
+      }
+
+      return result;
+    }
+
+    /// <summary>
+    /// メソッドの置き換え
+    /// </summary>
+    /// <param name="srcText">ソース文字列</param>
+    /// <param name="regexText">正規表現</param>
+    /// <param name="replaceText">置き換え後の対象</param>
+    /// <returns>置き換え後文字列</returns>
+    private string ReplaceMethod(string srcText, string regexText, string replaceText)
+    {
+      var result = srcText;
+
+      var replaceCount = Regex.Matches(replaceText, @"\{[0-9]}").Count;
+      if (replaceCount <= 0)
+      {
+        // 置換文字列にパラメータが設定されていない場合は単純な置換え
+        result = Regex.Replace(srcText, regexText, replaceText);
+      }
+      else
+      {
+        // パラメータの取得
+        var args = new List<string>();
+        foreach (Match match in Regex.Matches(srcText, $"^{regexText}\\((.+?)\\)$"))
+        {
+          if (match.Groups.Count < 2)
+          {
+            break;
+          }
+          // カンマ区切りでパラメータリスト作成
+          args.AddRange(Regex.Split(match.Groups[1].Value, @"\s*,\s*(?=(?:[^""]*""[^""]*"")*[^""]*$)").Select(arg => arg.Trim()).ToList());
+        }
+
+        // 置換文字列のパラメータ数より作成したパラメータ数が少ない場合は元の文字列を返す
+        if (replaceCount > args.Count)
+        {
+          return srcText;
+        }
+
+        try
+        {
+          // 置換を実施
+          result = Regex.Replace(srcText, $"{regexText}\\(.*\\)$", string.Format(CultureInfo.InvariantCulture, replaceText, args.ToArray()));
+        }
+        catch
+        {
+          throw;
+        }
+      }
+
+      return result;
+    }
+
+    #endregion
 
     /// <summary>
     /// 親クラスのパスを取得する

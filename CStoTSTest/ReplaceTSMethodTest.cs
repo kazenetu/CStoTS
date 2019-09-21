@@ -44,7 +44,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("    return '';");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public Method3(): string {");
-      expectedTS.AppendLine("    return (new List<int>()).ToString();");
+      expectedTS.AppendLine("    return (10).toString();");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

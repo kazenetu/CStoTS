@@ -229,5 +229,31 @@ namespace CStoTSTest
 
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
+
+    [Fact(DisplayName = "GenericsMemberTest")]
+    public void GenericsMemberTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public interface Test
+      {
+        void Method<T>(T param);
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export interface Test {");
+      expectedTS.AppendLine("  method<T>(param: T): void;");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
   }
 }

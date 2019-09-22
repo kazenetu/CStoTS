@@ -34,16 +34,41 @@ namespace CStoTS.Domain.Model.Converter
     private string Convert(IItemMethod item, int indent, List<string> otherScripts)
     {
       var result = new StringBuilder();
+
+      // クラス(nullの場合はstring.Empty)
+      result.Append(ConvertMain(item.Parent as IItemClass, item, indent, otherScripts));
+
+      // インターフェイス(nullの場合はstring.Empty)
+      result.Append(ConvertMain(item.Parent as IItemInterface, item, indent, otherScripts));
+
+      return result.ToString();
+    }
+
+    /// <summary>
+    /// 変換メソッド メイン処理(class)
+    /// </summary>
+    /// <param name="parentInstanse">親インスタンス</param>
+    /// <param name="item">C#解析結果</param>
+    /// <param name="indent">インデント数</param>
+    /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
+    /// <returns>TypeScript変換結果</returns>
+    private string ConvertMain(IItemClass parentInstanse, IItemMethod item, int indent, List<string> otherScripts)
+    {
+      // 親インスタンスがnullの場合はそのまま終了
+      if(parentInstanse is null){
+        return string.Empty;
+      }
+
+      var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
 
       // メソッド名
       string BaseMethodName = item.Name;
 
-      // クラス情報を取得
-      var classInstanse = item.Parent as IItemClass;
-      var className = classInstanse.Name;
+      // クラス情報(親インスタンス)を取得
+      var className = parentInstanse.Name;
       var targetIndex = 1;
-      var targetItems = classInstanse.Members.Where(member => member is IItemMethod && member.Name == BaseMethodName)
+      var targetItems = parentInstanse.Members.Where(member => member is IItemMethod && member.Name == BaseMethodName)
                         .Select(member => (index: targetIndex++, item: member as IItemMethod)).ToList();
       var isOverload = targetItems.Count() > 1;
       var returnType = ExpressionsToString(item.MethodTypes);
@@ -184,7 +209,8 @@ namespace CStoTS.Domain.Model.Converter
         }
         result.Append($"): {returnType}");
         result.AppendLine(" {");
-        if(isReturn){
+        if (isReturn)
+        {
           result.Append("return ");
         }
         result.Append(methodResult.ToString());
@@ -193,5 +219,56 @@ namespace CStoTS.Domain.Model.Converter
 
       return result.ToString();
     }
+
+    /// <summary>
+    /// 変換メソッド メイン処理(interface)
+    /// </summary>
+    /// <param name="parentInstanse">親インスタンス</param>
+    /// <param name="item">C#解析結果</param>
+    /// <param name="indent">インデント数</param>
+    /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
+    /// <returns>TypeScript変換結果</returns>
+    private string ConvertMain(IItemInterface parentInstanse, IItemMethod item, int indent, List<string> otherScripts)
+    {
+      // 親インスタンスがnullの場合はそのまま終了
+      if (parentInstanse is null)
+      {
+        return string.Empty;
+      }
+
+      var result = new StringBuilder();
+      var indentSpace = GetIndentSpace(indent);
+
+      // メソッド名
+      string BaseMethodName = item.Name;
+
+      // コメント
+      result.Append(GetTypeScriptComments(item, indentSpace));
+
+      // パラメータ取得
+      var args = new List<string>();
+      foreach (var arg in item.Args)
+      {
+        args.Add($"{arg.name}: {ExpressionsToString(arg.expressions)}");
+      }
+
+      // 定義
+      var returnType = ExpressionsToString(item.MethodTypes);
+      result.Append($"{indentSpace}{BaseMethodName}");
+      // ジェネリックスクラス
+      if (item.GenericTypes.Any())
+      {
+        result.Append("<");
+        result.Append(string.Join(", ", item.GenericTypes.Select(typeItem => GetTypeScriptType(typeItem))));
+        result.Append(">");
+      }
+      result.Append("(");
+      result.Append(string.Join(", ", args));
+      result.Append($"): {returnType};");
+      result.AppendLine();
+
+      return result.ToString();
+    }
+
   }
 }

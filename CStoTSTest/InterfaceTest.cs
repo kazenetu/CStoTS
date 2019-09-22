@@ -195,8 +195,8 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export interface Test {");
-      expectedTS.AppendLine("  field: string;");
-      expectedTS.AppendLine("  method(): void;");
+      expectedTS.AppendLine("  field: number;");
+      expectedTS.AppendLine("  Method(): void;");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -222,8 +222,8 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export interface Test {");
-      expectedTS.AppendLine("  method(): void;");
-      expectedTS.AppendLine("  method(param: number): void;");
+      expectedTS.AppendLine("  Method(): void;");
+      expectedTS.AppendLine("  Method(param: number): void;");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -248,7 +248,7 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export interface Test {");
-      expectedTS.AppendLine("  method<T>(param: T): void;");
+      expectedTS.AppendLine("  Method<T>(param: T): void;");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

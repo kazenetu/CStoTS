@@ -222,9 +222,8 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export interface Test {");
-      expectedTS.AppendLine("  field: string;");
       expectedTS.AppendLine("  method(): void;");
-      expectedTS.AppendLine("  method(a: number): void;");
+      expectedTS.AppendLine("  method(param: number): void;");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);

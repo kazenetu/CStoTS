@@ -175,5 +175,31 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    [Fact(DisplayName = "MemberTest")]
+    public void MemberTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public interface Test
+      {
+        int field;
+        void Method();
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export interface Test {");
+      expectedTS.AppendLine("  field: string;");
+      expectedTS.AppendLine("  method(): void;");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
   }
 }

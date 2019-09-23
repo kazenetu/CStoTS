@@ -129,6 +129,67 @@ namespace CStoTS.Domain.Model.Converter
     }
 
     /// <summary>
+    /// デフォルト値を取得
+    /// </summary>
+    /// <param name="expressions">C#の型情報</param>
+    /// <returns>TypeScriptのデフォルト値</returns>
+    protected string GetDefaultString(List<IExpression> expressions)
+    {
+      // 値なしの場合は終了
+      if(!expressions.Any()){
+        return string.Empty;
+      }
+
+      var result = new StringBuilder();
+      result.Append(" = ");
+      switch (expressions.First().TypeName.ToLower(CultureInfo.CurrentCulture)){
+        case "string":
+          result.Append("\"\"");
+          return result.ToString();
+        case "byte":
+        case "int16":
+        case "int32":
+        case "int64":
+        case "sbyte":
+        case "uint16":
+        case "uint32":
+        case "uint64":
+        case "biginteger":
+        case "decimal":
+        case "double":
+        case "single":
+          result.Append("0");
+          return result.ToString();
+        case "boolean":
+          result.Append("false");
+          return result.ToString();
+        default:
+          result.Append("new ");
+          break;
+      }
+
+      foreach (var exp in expressions)
+      {
+        // 前スペースの代入
+        if (beforeSpaceKeywords.Contains(exp.Name))
+        {
+          result.Append(" ");
+        }
+
+        result.Append(GetTypeScriptType(exp.Name));
+
+        // 後ろスペースの代入
+        if (afterSpaceKeywords.Contains(exp.Name))
+        {
+          result.Append(" ");
+        }
+      }
+      result.Append("()");
+
+      return ReplaceMethodNames(result.ToString());
+    }
+
+    /// <summary>
     /// 型のTypeScript変換
     /// </summary>
     /// <param name="src">C#用型</param>

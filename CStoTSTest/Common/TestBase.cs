@@ -1,4 +1,5 @@
 ﻿using CStoTS.ApplicationService;
+using CStoTS.Domain.Model.Mode;
 using CStoTSTest.Common;
 using System.Globalization;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace CStoTS
     public void ConvertTS()
     {
       var csToTs = new ConvertApplication();
-      csToTs.Convert(string.Empty, string.Empty, tsFiles, csFiles);
+      csToTs.Convert(Config.Create(string.Empty, string.Empty), tsFiles, csFiles);
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces.Repository;
 using CStoTS.Domain.Model;
+using CStoTS.Domain.Model.Mode;
 using CStoTS.Infrastructure;
 using System;
 
@@ -10,7 +11,13 @@ namespace CStoTS.Domain.Service
   /// </summary>
   internal class ConvertService
   {
-    public void Convert(string inputCSRoot, string outputTSRoot, ITSFileRepository outputRepository, ICSFileRepository inputRepository)
+    /// <summary>
+    /// 変換処理
+    /// </summary>
+    /// <param name="config">設定情報</param>
+    /// <param name="outputRepository">出力用リポジトリインスタンス</param>
+    /// <param name="inputRepository">入力用リポジトリインスタンス</param>
+    public void Convert(Config config, ITSFileRepository outputRepository, ICSFileRepository inputRepository)
     {
       var csApplication = new CSharpAnalyze.ApplicationService.AnalyzeApplication();
 
@@ -18,18 +25,18 @@ namespace CStoTS.Domain.Service
       csApplication.Register<CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed>(csApplication, (ev) =>
       {
         var converter = new MainConverter();
-        var result = converter.ConvertTS(ev);
+        var result = converter.ConvertTS(ev, config);
 
         // output file
         var filePath = ev.FilePath.Replace(".cs", ".ts", StringComparison.CurrentCulture);
-        outputRepository.WriteFile($"{outputTSRoot}{filePath}", result);
+        outputRepository.WriteFile($"{config.OutputTSRoot.Value}{filePath}", result);
       });
 
       // Run C# Analyze
-      csApplication.Analyze(inputCSRoot, inputRepository);
+      csApplication.Analyze(config.InputCSRoot.Value, inputRepository);
 
       // output fixed TypeScript files
-      outputRepository.OutputFixedTypeScripts(outputTSRoot);
+      outputRepository.OutputFixedTypeScripts(config.OutputTSRoot.Value);
 
     }
   }

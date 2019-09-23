@@ -55,10 +55,17 @@ namespace CStoTS
     /// <summary>
     /// TypeScript変換
     /// </summary>
-    public void ConvertTS()
+    /// <param name="withoutMethod">メソッド除外を追加するか否か</param>
+    public void ConvertTS(bool withoutMethod = false)
     {
+      var mode = OutputMode.Mode.All;
+      if(withoutMethod){
+        // メソッド除外
+        mode = OutputMode.Mode.WithoutMethod;
+      }
+
       var csToTs = new ConvertApplication();
-      csToTs.Convert(Config.Create(string.Empty, string.Empty), tsFiles, csFiles);
+      csToTs.Convert(Config.Create(mode, string.Empty, string.Empty), tsFiles, csFiles);
     }
 
     /// <summary>

@@ -31,7 +31,7 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  private field: number;");
+      expectedTS.AppendLine("  private field: number = 0;");
       expectedTS.AppendLine("}");
 
       Assert.Equal(expectedTS.ToString(), actualTS);
@@ -76,21 +76,21 @@ namespace CStoTSTest
       expectedTS.AppendLine("  public get Field(): string {");
       expectedTS.AppendLine("    return this.field;");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  private _Property_: string;");
+      expectedTS.AppendLine("  private _Property_: string = \"\";");
       expectedTS.AppendLine("  public set Property(value: string) {");
       expectedTS.AppendLine("    this._Property_ = value;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public get Property(): string {");
       expectedTS.AppendLine("    return this._Property_;");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  private _Property2_: string;");
+      expectedTS.AppendLine("  private _Property2_: string = \"\";");
       expectedTS.AppendLine("  public set Property2(value: string) {");
       expectedTS.AppendLine("    this._Property2_ = value;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public get Property2(): string {");
       expectedTS.AppendLine("    return this._Property2_;");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  private static _StaticProperty_: string;");
+      expectedTS.AppendLine("  private static _StaticProperty_: string = \"\";");
       expectedTS.AppendLine("  public static set StaticProperty(value: string) {");
       expectedTS.AppendLine("    Test._StaticProperty_ = value;");
       expectedTS.AppendLine("  }");
@@ -135,10 +135,7 @@ namespace CStoTSTest
 
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  constructor() {");
-      expectedTS.AppendLine("    this.field = \"ABC\";");
-      expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  private field: string;");
+      expectedTS.AppendLine("  private field: string = \"\";");
       expectedTS.AppendLine("  public set Field(value: string) {");
       expectedTS.AppendLine("    this.field = value;");
       expectedTS.AppendLine("  }");

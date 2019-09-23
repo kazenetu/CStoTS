@@ -102,6 +102,38 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    [Fact(DisplayName = "InnerClassTest")]
+    public void InnerClassTest()
+    {
+      // C#ソース作成
+      CreateFileData("test.cs", string.Empty,
+      @"public class Test
+      {
+        public class Inner {
+        }
+        private Test.Inner inner;
+      }");
+
+      // 変換
+      ConvertTS();
+
+      // 変換確認
+      var actualTS = GetTypeScript("test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  private inner: Test.Inner = new Test.Inner();");
+      expectedTS.AppendLine("}");
+
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export class Inner {");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
     [Fact(DisplayName = "ConstructorTest")]
     public void ConstructorTest()
     {

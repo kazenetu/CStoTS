@@ -1,4 +1,5 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
+using CStoTS.Domain.Model.Mode;
 using System.Collections.Generic;
 
 namespace CStoTS.Domain.Model.Interface
@@ -8,6 +9,6 @@ namespace CStoTS.Domain.Model.Interface
   /// </summary>
   internal interface IConvertable
   {
-    string Convert(IAnalyzeItem item, int indent, List<string> otherScripts);
+    string Convert(IAnalyzeItem item, Config config, int indent, List<string> otherScripts);
   }
 }

@@ -1,6 +1,7 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
+using CStoTS.Domain.Model.Mode;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,12 +17,13 @@ namespace CStoTS.Domain.Model.Converter
     /// エントリメソッド
     /// </summary>
     /// <param name="item">C#解析結果</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    public string Convert(IAnalyzeItem item, int indent, List<string> otherScripts)
+    public string Convert(IAnalyzeItem item, Config config, int indent, List<string> otherScripts)
     {
-      return Convert(item as IItemMethod, indent, otherScripts);
+      return Convert(item as IItemMethod, config, indent, otherScripts);
     }
 
     /// <summary>
@@ -31,15 +33,15 @@ namespace CStoTS.Domain.Model.Converter
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    private string Convert(IItemMethod item, int indent, List<string> otherScripts)
+    private string Convert(IItemMethod item, Config config, int indent, List<string> otherScripts)
     {
       var result = new StringBuilder();
 
       // クラス(nullの場合はstring.Empty)
-      result.Append(ConvertMain(item.Parent as IItemClass, item, indent, otherScripts));
+      result.Append(ConvertMain(item.Parent as IItemClass, item, config, indent, otherScripts));
 
       // インターフェイス(nullの場合はstring.Empty)
-      result.Append(ConvertMain(item.Parent as IItemInterface, item, indent, otherScripts));
+      result.Append(ConvertMain(item.Parent as IItemInterface, item, config, indent, otherScripts));
 
       return result.ToString();
     }
@@ -49,10 +51,11 @@ namespace CStoTS.Domain.Model.Converter
     /// </summary>
     /// <param name="parentInstanse">親インスタンス</param>
     /// <param name="item">C#解析結果</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    private string ConvertMain(IItemClass parentInstanse, IItemMethod item, int indent, List<string> otherScripts)
+    private string ConvertMain(IItemClass parentInstanse, IItemMethod item,Config config, int indent, List<string> otherScripts)
     {
       // 親インスタンスがnullの場合はそのまま終了
       if(parentInstanse is null){
@@ -125,7 +128,7 @@ namespace CStoTS.Domain.Model.Converter
       // メンバー追加
       foreach (var member in item.Members)
       {
-        result.Append(ConvertUtility.Convert(member, indent + 1, otherScripts));
+        result.Append(ConvertUtility.Convert(member, config, indent + 1, otherScripts));
       }
 
       result.AppendLine($"{indentSpace}}}");
@@ -225,10 +228,11 @@ namespace CStoTS.Domain.Model.Converter
     /// </summary>
     /// <param name="parentInstanse">親インスタンス</param>
     /// <param name="item">C#解析結果</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    private string ConvertMain(IItemInterface parentInstanse, IItemMethod item, int indent, List<string> otherScripts)
+    private string ConvertMain(IItemInterface parentInstanse, IItemMethod item, Config config, int indent, List<string> otherScripts)
     {
       // 親インスタンスがnullの場合はそのまま終了
       if (parentInstanse is null)

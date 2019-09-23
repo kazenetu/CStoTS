@@ -80,7 +80,7 @@ namespace CStoTS.Domain.Model
       // TS変換変換結果を取得
       foreach(var targetItem in targetItems){
         var otherScripts = new List<string>();
-        result.Append(ConvertUtility.Convert(targetItem, 0, otherScripts));
+        result.Append(ConvertUtility.Convert(targetItem, config, 0, otherScripts));
         result.Append(string.Join(Environment.NewLine, otherScripts));
       }
 

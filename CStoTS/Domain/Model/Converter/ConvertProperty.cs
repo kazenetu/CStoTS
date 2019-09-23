@@ -1,6 +1,7 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces;
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
+using CStoTS.Domain.Model.Mode;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,22 +18,24 @@ namespace CStoTS.Domain.Model.Converter
     /// エントリメソッド
     /// </summary>
     /// <param name="item">C#解析結果</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    public string Convert(IAnalyzeItem item, int indent, List<string> otherScripts)
+    public string Convert(IAnalyzeItem item, Config config, int indent, List<string> otherScripts)
     {
-      return Convert(item as IItemProperty, indent, otherScripts);
+      return Convert(item as IItemProperty, config, indent, otherScripts);
     }
 
     /// <summary>
     /// 変換メソッド
     /// </summary>
     /// <param name="item">C#解析結果</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>TypeScript変換結果</returns>
-    private string Convert(IItemProperty item, int indent, List<string> otherScripts)
+    private string Convert(IItemProperty item, Config config, int indent, List<string> otherScripts)
     {
       var result = new StringBuilder();
       var indentSpace = GetIndentSpace(indent);
@@ -76,7 +79,7 @@ namespace CStoTS.Domain.Model.Converter
       foreach (var accessor in item.AccessorList)
       {
         result.Append(comment);
-        result.Append(GetAccessorString(accessor, indent, scope, item.Name, propertyType, refTarget, otherScripts));
+        result.Append(GetAccessorString(accessor, config, indent, scope, item.Name, propertyType, refTarget, otherScripts));
       }
 
       return result.ToString();
@@ -86,6 +89,7 @@ namespace CStoTS.Domain.Model.Converter
     /// プロパティのset/get用Typescriptを返す
     /// </summary>
     /// <param name="accessorItem">set/get用のアイテム</param>
+    /// <param name="config">設定情報</param>
     /// <param name="indent">インデント数</param>
     /// <param name="scope">スコープ名</param>
     /// <param name="propertyName">プロパティ名</param>
@@ -93,7 +97,7 @@ namespace CStoTS.Domain.Model.Converter
     /// <param name="refTarget">参照名(インスタンス参照の場合はthis)</param>
     /// <param name="otherScripts">その他のスクリプト(内部クラスなど)</param>
     /// <returns>set/get用Typescriptの文字列</returns>
-    private string GetAccessorString(IAnalyzeItem accessorItem, int indent, string scope, string propertyName, string propertyType,string refTarget, List<string> otherScripts)
+    private string GetAccessorString(IAnalyzeItem accessorItem, Config config, int indent, string scope, string propertyName, string propertyType,string refTarget, List<string> otherScripts)
     {
       var indentSpace = GetIndentSpace(indent);
 
@@ -131,7 +135,7 @@ namespace CStoTS.Domain.Model.Converter
       // メンバー追加
       foreach (var member in accessorItem.Members)
       {
-        result.Append(ConvertUtility.Convert(member, indent + 1, otherScripts));
+        result.Append(ConvertUtility.Convert(member, config, indent + 1, otherScripts));
       }
 
       result.AppendLine($"{indentSpace}}}");

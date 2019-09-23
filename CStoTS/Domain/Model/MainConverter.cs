@@ -1,4 +1,5 @@
 ﻿using CSharpAnalyze.Domain.PublicInterfaces.Events;
+using CStoTS.Domain.Model.Mode;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,14 @@ namespace CStoTS.Domain.Model
       "./Float",
     };
 
-    public string ConvertTS(IAnalyzed analyzed, int indent = 0)
+    /// <summary>
+    /// 変換処理
+    /// </summary>
+    /// <param name="analyzed">C#変換結果</param>
+    /// <param name="config">設定情報</param>
+    /// <param name="indent">インデント数</param>
+    /// <returns>変換後のTypeScript文字列</returns>
+    public string ConvertTS(IAnalyzed analyzed, Config config, int indent = 0)
     {
       var result = new StringBuilder();
 

@@ -23,7 +23,7 @@ namespace CStoTSTest
       }");
 
       // 変換
-      ConvertTS();
+      ConvertTS(true);
 
       // 変換確認
       var actualTS = GetTypeScript("test.ts");
@@ -61,7 +61,7 @@ namespace CStoTSTest
       }");
 
       // 変換
-      ConvertTS();
+      ConvertTS(true);
 
       // 変換確認
       var actualTS = GetTypeScript("test.ts");
@@ -115,7 +115,7 @@ namespace CStoTSTest
       }");
 
       // 変換
-      ConvertTS();
+      ConvertTS(true);
 
       // 変換確認
       var actualTS = GetTypeScript("test.ts");
@@ -159,7 +159,7 @@ namespace CStoTSTest
       }");
 
       // 変換
-      ConvertTS();
+      ConvertTS(true);
 
       // 変換確認
       var actualTS = GetTypeScript("test.ts");
@@ -189,7 +189,7 @@ namespace CStoTSTest
       }");
 
       // 変換
-      ConvertTS();
+      ConvertTS(true);
 
       // 変換確認
       var actualTS = GetTypeScript("test.ts");

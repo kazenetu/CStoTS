@@ -30,4 +30,16 @@ git pull --recurse-submodules
 * [X] 固定出力のTypeScriptファイルの格納場所の確定
 * [X] JSONシリアライズ/デシリアライズTypeScriptの作成
 * [ ] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
+* [ ] TypeScript変換処理のテスト作成・実装
+   * [ ] 列挙型
+   * [ ] ローカルフィールド
+   * [ ] ローカルメソッド
+   * [ ] ローカル変数
+   * [ ] if-else構文
+   * [ ] switch構文
+   * [ ] for構文
+   * [ ] foreach構文
+   * [ ] while
+   * [ ] do-while
+
 

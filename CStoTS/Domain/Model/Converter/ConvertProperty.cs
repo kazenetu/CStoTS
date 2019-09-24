@@ -67,6 +67,13 @@ namespace CStoTS.Domain.Model.Converter
         {
           result.Append($" = {ExpressionsToString(item.DefaultValues)}");
         }
+        else
+        {
+          if (config.Mode.Value == OutputMode.Mode.WithoutMethod)
+          {
+            result.Append(GetDefaultString(item.PropertyTypes));
+          }
+        }
         result.AppendLine(";");
       }
 

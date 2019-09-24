@@ -49,8 +49,16 @@ namespace CStoTS.Domain.Model.Converter
       result.Append($": {ExpressionsToString(item.FieldTypes)}");
 
       // デフォルト設定
-      if(item.DefaultValues.Any()){
+      if (item.DefaultValues.Any())
+      {
         result.Append($" = {ExpressionsToString(item.DefaultValues)}");
+      }
+      else
+      {
+        if (config.Mode.Value == OutputMode.Mode.WithoutMethod)
+        {
+          result.Append(GetDefaultString(item.FieldTypes));
+        }
       }
 
       result.AppendLine(";");

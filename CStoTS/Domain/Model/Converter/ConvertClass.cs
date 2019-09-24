@@ -69,7 +69,13 @@ namespace CStoTS.Domain.Model.Converter
       result.AppendLine(" {");
 
       // メンバー追加
-      foreach(var member in item.Members){
+      var members = item.Members;
+      if(config.Mode.Value == OutputMode.Mode.WithoutMethod){
+        members = members.Where(member => member is IItemField || member is IItemProperty || member is IItemClass || member is IItemInterface).ToList();
+      }
+
+      foreach (var member in members)
+      {
         result.Append(ConvertUtility.Convert(member, config, indent + 1, otherScripts));
       }
 

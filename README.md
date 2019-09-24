@@ -29,7 +29,7 @@ git pull --recurse-submodules
 * [X] 階層構造のあるimport(外部参照)のテストと実装を追加
 * [X] 固定出力のTypeScriptファイルの格納場所の確定
 * [X] JSONシリアライズ/デシリアライズTypeScriptの作成
-* [ ] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
+* [X] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
 * [ ] TypeScript変換処理のテスト作成・実装
    * [ ] 列挙型
    * [ ] ローカルフィールド

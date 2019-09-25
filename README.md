@@ -34,7 +34,6 @@ git pull --recurse-submodules
    * [ ] 列挙型
    * [ ] ローカルフィールド
    * [ ] ローカルメソッド
-   * [ ] ローカル変数
    * [ ] if-else構文
    * [ ] switch構文
    * [ ] for構文

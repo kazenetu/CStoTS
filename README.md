@@ -38,7 +38,7 @@ git pull --recurse-submodules
    * [ ] switch構文
    * [ ] for構文
    * [ ] foreach構文
-   * [ ] while
-   * [ ] do-while
+   * [ ] while構文
+   * [ ] do-while構文
 
 

@@ -27,6 +27,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemProperty), ()=>new ConvertProperty() },
       {typeof(IItemReturn), ()=>new ConvertReturn() },
       {typeof(IItemStatementExpression), ()=>new ConvertStatementExpression() },
+      {typeof(IItemEnum), ()=>new ConvertEnum() },
     };
 
     /// <summary>

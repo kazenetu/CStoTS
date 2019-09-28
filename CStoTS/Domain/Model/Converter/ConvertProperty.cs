@@ -2,6 +2,7 @@
 using CSharpAnalyze.Domain.PublicInterfaces.AnalyzeItems;
 using CStoTS.Domain.Model.Interface;
 using CStoTS.Domain.Model.Mode;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -65,7 +66,14 @@ namespace CStoTS.Domain.Model.Converter
         // デフォルト設定
         if (item.DefaultValues.Any())
         {
-          result.Append($" = {ExpressionsToString(item.DefaultValues)}");
+          var parentClass = string.Empty;
+          if (item.DefaultValues.First().TypeName == "Enum")
+          {
+            parentClass = ExpressionsToString(item.PropertyTypes);
+            parentClass = parentClass.Substring(0, parentClass.LastIndexOf(".", StringComparison.CurrentCulture) + 1);
+          }
+
+          result.Append($" = {parentClass}{ExpressionsToString(item.DefaultValues)}");
         }
         else
         {

@@ -144,6 +144,13 @@ namespace CStoTS.Domain.Model.Converter
         var existsNoneParam = paramCounts.Min() <= 0;
         var maxParamCount = paramCounts.Max();
 
+        // 複数戻り値の存在確認
+        var retrunTypeCount = targetItems.
+              Select(returnTypeItem => ExpressionsToString(returnTypeItem.item.MethodTypes)).
+              Distinct().
+              Count();
+        var isMultiReturnType = retrunTypeCount > 1;
+
         // パラメータリストを生成
         var methodArgs = new Dictionary<int, List<string>>();
         for (var index = 1; index <= maxParamCount; index++)
@@ -186,16 +193,29 @@ namespace CStoTS.Domain.Model.Converter
           // メソッド内処理の追加
           var methodSpace = GetIndentSpace(indent + 1);
           methodResult.AppendLine($"{methodSpace}if ({string.Join(" && ", ifConditions)}) {{");
-          methodResult.Append($"{GetIndentSpace(indent + 2)}this.{BaseMethodName}{targetItem.index}");
+
+          methodResult.Append($"{GetIndentSpace(indent + 2)}");
+          if (isMultiReturnType)
+          {
+            methodResult.Append($"return ");
+          }
+          methodResult.Append($"this.{BaseMethodName}{targetItem.index}");
           methodResult.Append("(");
           methodResult.Append(string.Join(", ", callMethodParams));
           methodResult.AppendLine(");");
-          methodResult.AppendLine($"{GetIndentSpace(indent + 2)}return;");
+          if (!isMultiReturnType)
+          {
+            methodResult.AppendLine($"{GetIndentSpace(indent + 2)}return;");
+          }
+
           methodResult.AppendLine($"{methodSpace}}}");
+
         }
 
         // 総合メソッドの作成
         result.Append($"{indentSpace}{GetScope(item)}{BaseMethodName}(");
+
+        // パラメータ設定
         for (var index = 1; index <= maxParamCount; index++)
         {
           if (index > 1)
@@ -210,12 +230,16 @@ namespace CStoTS.Domain.Model.Converter
           }
           result.Append($": {string.Join(" | ", methodArgs[index])}");
         }
-        result.Append($"): {returnType}");
-        result.AppendLine(" {");
-        if (isReturn)
+
+        // 戻り値
+        var methodType = returnType;
+        if(isMultiReturnType)
         {
-          result.Append("return ");
+          methodType = "any";
         }
+
+        result.Append($"): {methodType}");
+        result.AppendLine(" {");
         result.Append(methodResult.ToString());
         result.AppendLine($"{indentSpace}}}");
       }

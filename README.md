@@ -31,7 +31,7 @@ git pull --recurse-submodules
 * [X] JSONシリアライズ/デシリアライズTypeScriptの作成
 * [X] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
 * [ ] TypeScript変換処理のテスト作成・実装
-   * [ ] 列挙型
+   * [X] 列挙型
    * [ ] ローカルフィールド
    * [ ] ローカルメソッド
    * [ ] if-else構文

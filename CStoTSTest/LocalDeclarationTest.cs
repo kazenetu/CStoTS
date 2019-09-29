@@ -132,8 +132,8 @@ namespace CStoTSTest
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): void {");
       expectedTS.AppendLine("    let localVar: Test.CompassDirection = Test.CompassDirection.East;");
-      expectedTS.AppendLine("    let localString1: Test.CompassDirection = Test.CompassDirection.North;");
-      expectedTS.AppendLine("    let localString2: Test.CompassDirection;");
+      expectedTS.AppendLine("    let localEnum1: Test.CompassDirection = Test.CompassDirection.North;");
+      expectedTS.AppendLine("    let localEnum2: Test.CompassDirection;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
       expectedTS.AppendLine("export namespace Test {");

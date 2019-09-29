@@ -70,7 +70,7 @@ namespace CStoTS.Domain.Model
       var importTargets = importFileKeys.Where(item => !exclusionImportFiles.Contains(item.Key)).OrderBy(item => item.Key);
       if (importTargets.Any())
       {
-        result.Append(string.Join(Environment.NewLine, importTargets.Select(item => $"import {{ {string.Join(", ", item.Value)} }} from '{item.Key}';")));
+        result.Append(string.Join(Environment.NewLine, importTargets.Select(item => $"import {{ {string.Join(", ", item.Value.Distinct())} }} from '{item.Key}';")));
         result.AppendLine(Environment.NewLine);
       }
 

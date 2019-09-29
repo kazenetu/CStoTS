@@ -155,12 +155,22 @@ namespace CStoTSTest
       CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
+        private enum CompassDirection
+        {
+          North,
+          East,
+          South,
+          West
+        }
+
         public void Method()
         {
           var localVar = ReturnMethod(""abc"");
           string localString = ReturnMethod(""DEF"");
           var localInt1 = ReturnMethod(10);
           int localInt2 = ReturnMethod(100);
+
+          var localEnum = ReturnEnumMethod(CompassDirection.South);
         }
 
         public string ReturnMethod(string value)
@@ -171,6 +181,11 @@ namespace CStoTSTest
         public int ReturnMethod(int value)
         {
           return value;
+        }
+
+        public CompassDirection ReturnEnumMethod(CompassDirection value)
+        {
+          return CompassDirection.North;
         }
       }");
 
@@ -189,6 +204,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("    let localString: string = this.ReturnMethod(\"DEF\");");
       expectedTS.AppendLine("    let localInt1: number = this.ReturnMethod(10);");
       expectedTS.AppendLine("    let localInt2: number = this.ReturnMethod(100);");
+      expectedTS.AppendLine("    let localEnum: Test.CompassDirection = this.ReturnEnumMethod(Test.CompassDirection.South);");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  private ReturnMethod1(value: string): string {");
       expectedTS.AppendLine("    return value;");
@@ -203,6 +219,17 @@ namespace CStoTSTest
       expectedTS.AppendLine("    if (typeof param1 === 'number') {");
       expectedTS.AppendLine("      return this.ReturnMethod2(param1);");
       expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("  public ReturnEnumMethod(value: Test.CompassDirection): Test.CompassDirection {");
+      expectedTS.AppendLine("    return Test.CompassDirection.North;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export enum CompassDirection {");
+      expectedTS.AppendLine("    North,");
+      expectedTS.AppendLine("    East,");
+      expectedTS.AppendLine("    South,");
+      expectedTS.AppendLine("    West,");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

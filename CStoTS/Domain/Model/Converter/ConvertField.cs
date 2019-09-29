@@ -52,7 +52,7 @@ namespace CStoTS.Domain.Model.Converter
       // デフォルト設定
       if (item.DefaultValues.Any())
       {
-        result.Append($" = {ExpressionsToString(item.DefaultValues)}");
+        result.Append($" = {ExpressionsToString(item.DefaultValues, item.FieldTypes)}");
       }
       else
       {

@@ -66,14 +66,7 @@ namespace CStoTS.Domain.Model.Converter
         // デフォルト設定
         if (item.DefaultValues.Any())
         {
-          var parentClass = string.Empty;
-          if (item.DefaultValues.First().TypeName == "Enum")
-          {
-            parentClass = ExpressionsToString(item.PropertyTypes);
-            parentClass = parentClass.Substring(0, parentClass.LastIndexOf(".", StringComparison.CurrentCulture) + 1);
-          }
-
-          result.Append($" = {parentClass}{ExpressionsToString(item.DefaultValues)}");
+          result.Append($" = {ExpressionsToString(item.DefaultValues)}");
         }
         else
         {

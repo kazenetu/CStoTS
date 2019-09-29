@@ -105,10 +105,22 @@ namespace CStoTS.Domain.Model.Converter
     /// C#の型情報をTypeScriptに変換
     /// </summary>
     /// <param name="expressions">C#の型情報</param>
+    /// <param name="retrunTypes">C#の戻り値の型</param>
     /// <returns>TypeScriptの型情報</returns>
-    protected string ExpressionsToString(List<IExpression> expressions)
+    protected string ExpressionsToString(List<IExpression> expressions, List<IExpression> retrunTypes = null)
     {
       var result = new StringBuilder();
+
+      // 列挙型の場合はクラス名を付与する
+      if (retrunTypes != null && expressions.First().TypeName == "Enum")
+      {
+        var parentClass = string.Empty;
+        parentClass = ExpressionsToString(retrunTypes);
+        parentClass = parentClass.Substring(0, parentClass.LastIndexOf(".", StringComparison.CurrentCulture) + 1);
+
+        result.Append(parentClass);
+      }
+
       foreach (var exp in expressions)
       {
         // 前スペースの代入

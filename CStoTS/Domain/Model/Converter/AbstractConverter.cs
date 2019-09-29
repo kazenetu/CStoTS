@@ -111,16 +111,6 @@ namespace CStoTS.Domain.Model.Converter
     {
       var result = new StringBuilder();
 
-      // 列挙型の場合はクラス名を付与する
-      if (retrunTypes != null && expressions.First().TypeName == "Enum")
-      {
-        var parentClass = string.Empty;
-        parentClass = ExpressionsToString(retrunTypes);
-        parentClass = parentClass.Substring(0, parentClass.LastIndexOf(".", StringComparison.CurrentCulture) + 1);
-
-        result.Append(parentClass);
-      }
-
       foreach (var exp in expressions)
       {
         // 前スペースの代入

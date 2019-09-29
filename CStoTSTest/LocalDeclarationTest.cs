@@ -196,7 +196,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private ReturnMethod2(value: number): number {");
       expectedTS.AppendLine("    return value;");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  public ReturnMethod(param1: number | string): any {");
+      expectedTS.AppendLine("  public ReturnMethod(param1: string | number): any {");
       expectedTS.AppendLine("    if (typeof param1 === 'number') {");
       expectedTS.AppendLine("      return this.ReturnMethod1(param1);");
       expectedTS.AppendLine("    }");

@@ -32,7 +32,7 @@ git pull --recurse-submodules
 * [X] プロパティのみ出力フラグの機能追加(I/F用DTOクラス)
 * [ ] TypeScript変換処理のテスト作成・実装
    * [X] 列挙型
-   * [ ] ローカルフィールド
+   * [X] ローカルフィールド
    * [ ] ローカルメソッド
    * [ ] if-else構文
    * [ ] switch構文

@@ -100,7 +100,7 @@ namespace CStoTSTest
       // 変換後の期待値設定
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("  public static Method(): void {");
       expectedTS.AppendLine("    let VoidMethod = (): void => {");
       expectedTS.AppendLine("    };");
       expectedTS.AppendLine("    VoidMethod();");
@@ -109,7 +109,7 @@ namespace CStoTSTest
 
       expectedTS.AppendLine("export namespace Test {");
       expectedTS.AppendLine("  export class Inner {");
-      expectedTS.AppendLine("    public Method(): void {");
+      expectedTS.AppendLine("    public static Method(): void {");
       expectedTS.AppendLine("      let VoidMethod = (): void => {");
       expectedTS.AppendLine("      };");
       expectedTS.AppendLine("      VoidMethod();");
@@ -157,11 +157,11 @@ namespace CStoTSTest
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): void {");
-      expectedTS.AppendLine("    let EnumMethod = (): CompassDirection => {");
-      expectedTS.AppendLine("      return CompassDirection.East;");
+      expectedTS.AppendLine("    let EnumMethod = (): Test.CompassDirection => {");
+      expectedTS.AppendLine("      return Test.CompassDirection.East;");
       expectedTS.AppendLine("    };");
       expectedTS.AppendLine("    EnumMethod();");
-      expectedTS.AppendLine("    let enumValue: CompassDirection = EnumMethod();");
+      expectedTS.AppendLine("    let enumValue: Test.CompassDirection = EnumMethod();");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
       expectedTS.AppendLine("export namespace Test {");

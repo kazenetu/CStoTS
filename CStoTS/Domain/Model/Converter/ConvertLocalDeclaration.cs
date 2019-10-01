@@ -9,7 +9,7 @@ using System.Text;
 namespace CStoTS.Domain.Model.Converter
 {
   /// <summary>
-  /// TS変換クラス：ローカスメソッド
+  /// TS変換クラス：ローカルメソッド
   /// </summary>
   internal class ConvertLocalDeclaration : AbstractConverter, IConvertable
   {

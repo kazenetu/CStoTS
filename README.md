@@ -33,7 +33,7 @@ git pull --recurse-submodules
 * [ ] TypeScript変換処理のテスト作成・実装
    * [X] 列挙型
    * [X] ローカルフィールド
-   * [ ] ローカルメソッド
+   * [X] ローカルメソッド
    * [ ] if-else構文
    * [ ] switch構文
    * [ ] for構文

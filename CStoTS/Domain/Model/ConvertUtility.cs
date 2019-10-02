@@ -29,6 +29,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemStatementExpression), ()=>new ConvertStatementExpression() },
       {typeof(IItemEnum), ()=>new ConvertEnum() },
       {typeof(IItemStatementLocalDeclaration), ()=>new ConvertLocalDeclaration() },
+      {typeof(IItemLocalFunction), ()=>new ConvertLocalFunction() },
     };
 
     /// <summary>

@@ -22,6 +22,11 @@ namespace CStoTS.Domain.Model.Converter
       "-",
       "*",
       "/",
+      "==",
+      ">",
+      "<",
+      ">=",
+      "<=",
     };
 
     /// <summary>
@@ -34,6 +39,20 @@ namespace CStoTS.Domain.Model.Converter
       "/",
       "new",
       ",",
+      "==",
+      ">",
+      "<",
+      ">=",
+      "<=",
+    };
+
+    /// <summary>
+    /// スペース対象で型名称が必須
+    /// </summary>
+    private List<string> existsTypeSpaceKeywords = new List<string>()
+    {
+      ">",
+      "<",
     };
 
     /// <summary>
@@ -113,7 +132,7 @@ namespace CStoTS.Domain.Model.Converter
       foreach (var exp in expressions)
       {
         // 前スペースの代入
-        if (beforeSpaceKeywords.Contains(exp.Name))
+        if (IsSpaceKeyword(exp, beforeSpaceKeywords))
         {
           result.Append(" ");
         }
@@ -121,12 +140,35 @@ namespace CStoTS.Domain.Model.Converter
         result.Append(GetTypeScriptType(exp.Name));
 
         // 後ろスペースの代入
-        if (afterSpaceKeywords.Contains(exp.Name))
+        if (IsSpaceKeyword(exp, afterSpaceKeywords))
         {
           result.Append(" ");
         }
       }
       return ReplaceMethodNames(result.ToString());
+    }
+
+    /// <summary>
+    /// スペース代入確認
+    /// </summary>
+    /// <param name="targetExp">確認対象</param>
+    /// <param name="SpaceKeywords">スペースチェックリスト</param>
+    /// <returns>スペース代入結果</returns>
+    private bool IsSpaceKeyword(IExpression targetExp, List<string> SpaceKeywords)
+    {
+      // スペースチェックリストに含まれていない
+      if (!SpaceKeywords.Contains(targetExp.Name))
+      {
+        return false;
+      }
+
+      // 型名称必須リストに含まれている なおかつ 型名称が設定されていない
+      if (existsTypeSpaceKeywords.Contains(targetExp.Name) && string.IsNullOrEmpty(targetExp.TypeName))
+      {
+        return false;
+      }
+
+      return true;
     }
 
     /// <summary>
@@ -206,7 +248,7 @@ namespace CStoTS.Domain.Model.Converter
         case "decimal":
         case "long":
           return "number";
-        case "datetime":
+        case "DateTime":
           return "Date";
         case "==":
           return "===";

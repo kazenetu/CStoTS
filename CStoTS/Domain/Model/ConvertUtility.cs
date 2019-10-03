@@ -30,6 +30,8 @@ namespace CStoTS.Domain.Model
       {typeof(IItemEnum), ()=>new ConvertEnum() },
       {typeof(IItemStatementLocalDeclaration), ()=>new ConvertLocalDeclaration() },
       {typeof(IItemLocalFunction), ()=>new ConvertLocalFunction() },
+      {typeof(IItemIf), ()=>new ConvertIfElse() },
+      {typeof(IItemElseClause), ()=>new ConvertIfElse() },
     };
 
     /// <summary>

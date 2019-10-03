@@ -206,6 +206,10 @@ namespace CStoTS.Domain.Model.Converter
         case "decimal":
         case "long":
           return "number";
+        case "datetime":
+          return "Date";
+        case "==":
+          return "===";
       }
 
       return src;

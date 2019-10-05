@@ -32,6 +32,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemLocalFunction), ()=>new ConvertLocalFunction() },
       {typeof(IItemIf), ()=>new ConvertIfElse() },
       {typeof(IItemElseClause), ()=>new ConvertIfElse() },
+      {typeof(IItemBreak), ()=>new ConvertBreak() },
     };
 
     /// <summary>

@@ -34,6 +34,8 @@ namespace CStoTS.Domain.Model
       {typeof(IItemElseClause), ()=>new ConvertIfElse() },
       {typeof(IItemBreak), ()=>new ConvertBreak() },
       {typeof(IItemContinue), ()=>new ConvertContinue() },
+      {typeof(IItemSwitch), ()=>new ConvertSwitch() },
+      {typeof(IItemSwitchCase), ()=>new ConvertSwitch() },
     };
 
     /// <summary>

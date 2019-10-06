@@ -277,7 +277,7 @@ namespace CStoTS.Domain.Model.Converter
         case "decimal":
         case "long":
           return "number";
-        case "DateTime":
+        case "datetime":
           return "Date";
         case "object":
           return "any";

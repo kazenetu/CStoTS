@@ -168,11 +168,13 @@ namespace CStoTSTest
       expectedTS.AppendLine("  public Method(): void {");
       expectedTS.AppendLine("    let val: any = 1;");
       expectedTS.AppendLine("    if (typeof val === \"number\") {");
-      expectedTS.AppendLine("      let i: number = val:");
-      expectedTS.AppendLine("    else if (typeof val === \"string\") {");
-      expectedTS.AppendLine("      let s: string = val:");
-      expectedTS.AppendLine("    } else if (val instanceof Date) {");
-      expectedTS.AppendLine("      let d: Date = val:");
+      expectedTS.AppendLine("      let i: number = val;");
+      expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    if (typeof val === \"string\") {");
+      expectedTS.AppendLine("      let s: string = val;");
+      expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    if (val instanceof Date) {");
+      expectedTS.AppendLine("      let d: Date = val;");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");

@@ -51,7 +51,7 @@ namespace CStoTS.Domain.Model.Converter
       result.Append(GetTypeScriptComments(item, indentSpace));
 
       // 定義
-      result.AppendLine($"{indentSpace}if ({ExpressionsToString(item.Conditions)}) {{");
+      result.AppendLine($"{indentSpace}if ({ConvertConditions(item.Conditions)}) {{");
 
       // メンバー追加
       foreach (var member in item.TrueBlock)
@@ -89,7 +89,7 @@ namespace CStoTS.Domain.Model.Converter
       // 定義
       if (item.Conditions.Any())
       {
-        result.AppendLine($"{indentSpace}else if ({ExpressionsToString(item.Conditions)}) {{");
+        result.AppendLine($"{indentSpace}else if ({ConvertConditions(item.Conditions)}) {{");
       }
       else
       {
@@ -107,5 +107,49 @@ namespace CStoTS.Domain.Model.Converter
       return result.ToString();
     }
 
+    /// <summary>
+    /// 条件式をTypeScriptに変換する
+    /// </summary>
+    /// <param name="conditions">条件式情報</param>
+    /// <returns>TypeScriptに変換した条件式</returns>
+    private string ConvertConditions(List<IExpression> conditions)
+    {
+      var isKeywordIndex = conditions.FindIndex(item=>item.Name == "is" && string.IsNullOrEmpty(item.TypeName));
+      if (isKeywordIndex > 0)
+      {
+        // 左辺値設定
+        var leftValue = ExpressionsToString(conditions.GetRange(0, isKeywordIndex));
+
+        // 右辺値設定
+        var rightValue = string.Empty;
+        var isLiteral = false;
+        foreach (var item in conditions.GetRange(isKeywordIndex + 1, conditions.Count - (isKeywordIndex + 1)))
+        {
+          isLiteral = IsLiteralType(item);
+          if (item.TypeName == "Enum")
+          {
+            isLiteral = true;
+            rightValue = "function";
+            break;
+          }
+          rightValue += GetTypeScriptType(item.Name);
+        }
+
+        // 条件式組み立て
+        var result = new StringBuilder();
+        if (isLiteral)
+        {
+          result.Append($"typeof {leftValue} === \"{rightValue}\"");
+        }
+        else
+        {
+          result.Append($"{leftValue} instanceof {rightValue}");
+        }
+        return result.ToString();
+      }
+
+      // isキーワードがない場合はそのままTypeScript変換して返す
+      return ExpressionsToString(conditions);
+    }
   }
 }

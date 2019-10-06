@@ -209,9 +209,9 @@ namespace CStoTSTest
       // 変換後の期待値設定
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
-      expectedTS.AppendLine("  private _Val_: number;");
-      expectedTS.AppendLine("  public get Val(): number {");
-      expectedTS.AppendLine("    return Test._Val_;");
+      expectedTS.AppendLine("  private _Val_: number = 1;");
+      expectedTS.AppendLine("  private get Val(): number {");
+      expectedTS.AppendLine("    return this._Val_;");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public Method(): void {");
       expectedTS.AppendLine("    switch (this.Val) {");
@@ -313,7 +313,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): void {");
       expectedTS.AppendLine("    let compassDirection: Test.CompassDirection = Test.CompassDirection.North;");
-      expectedTS.AppendLine("    switch (this.GetValue()) {");
+      expectedTS.AppendLine("    switch (compassDirection) {");
       expectedTS.AppendLine("      case Test.CompassDirection.North:");
       expectedTS.AppendLine("        break;");
       expectedTS.AppendLine("      case Test.CompassDirection.East:");

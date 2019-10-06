@@ -250,6 +250,8 @@ namespace CStoTS.Domain.Model.Converter
           return "number";
         case "DateTime":
           return "Date";
+        case "object":
+          return "any";
         case "==":
           return "===";
       }

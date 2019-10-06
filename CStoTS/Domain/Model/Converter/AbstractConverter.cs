@@ -293,9 +293,10 @@ namespace CStoTS.Domain.Model.Converter
     /// </summary>
     /// <param name="conditions">条件式情報</param>
     /// <returns>TypeScriptに変換した条件式</returns>
+    /// <remarks>条件式を新規作成する場合はisの代わりにnullを追加すること</remarks>
     protected string ConvertConditions(List<IExpression> conditions)
     {
-      var isKeywordIndex = conditions.FindIndex(item => item.Name == "is" && string.IsNullOrEmpty(item.TypeName));
+      var isKeywordIndex = conditions.FindIndex(item => item is null  || (item.Name == "is" && string.IsNullOrEmpty(item.TypeName)));
       if (isKeywordIndex > 0)
       {
         // 左辺値設定

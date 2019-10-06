@@ -121,16 +121,26 @@ namespace CStoTSTest
       CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
+        private enum CompassDirection
+        {
+          North,
+          East,
+          South,
+          West
+        }
         private string Field1;
         private int Field2;
         private DateTime Field3;
 
         public void Method(){
+          var compassDirection = CompassDirection.North;
           if(Field1 is string){
           }
           if(Field2 is int){
           }
           if(Field3 is DateTime){
+          }
+          if(compassDirection is CompassDirection){
           }
         }
       }");
@@ -148,12 +158,23 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private Field2: number;");
       expectedTS.AppendLine("  private Field3: Date;");
       expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("    let compassDirection: Test.CompassDirection = Test.CompassDirection.North;");
       expectedTS.AppendLine("    if (typeof this.Field1 === \"string\") {");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("    if (typeof this.Field2 === \"number\") {");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("    if (this.Field3 instanceof Date) {");
       expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    if (typeof compassDirection === \"function\") {");
+      expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export enum CompassDirection {");
+      expectedTS.AppendLine("    North,");
+      expectedTS.AppendLine("    East,");
+      expectedTS.AppendLine("    South,");
+      expectedTS.AppendLine("    West,");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

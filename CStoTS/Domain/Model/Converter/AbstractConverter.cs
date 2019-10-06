@@ -233,6 +233,35 @@ namespace CStoTS.Domain.Model.Converter
     }
 
     /// <summary>
+    /// 型が組み込みか否か
+    /// </summary>
+    /// <param name="expression">対象インスタンス</param>
+    /// <returns>組み込みか否か</returns>
+    protected bool IsLiteralType(IExpression expression)
+    {
+      switch (expression.TypeName.ToLower(CultureInfo.CurrentCulture))
+      {
+        case "string":
+        case "byte":
+        case "int16":
+        case "int32":
+        case "int64":
+        case "sbyte":
+        case "uint16":
+        case "uint32":
+        case "uint64":
+        case "biginteger":
+        case "decimal":
+        case "double":
+        case "single":
+        case "boolean":
+          return true;
+        default:
+          return false;
+      }
+    }
+
+    /// <summary>
     /// 型のTypeScript変換
     /// </summary>
     /// <param name="src">C#用型</param>

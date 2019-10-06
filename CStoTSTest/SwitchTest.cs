@@ -141,6 +141,13 @@ namespace CStoTSTest
       CreateFileData("test.cs", string.Empty,
       @"public class Test
       {
+        private enum CompassDirection
+        {
+          North,
+          East,
+          South,
+          West
+        }
         public void Method(){
           object val = 1;
           switch (val)
@@ -150,6 +157,8 @@ namespace CStoTSTest
             case string s:
               break;
             case DateTime d:
+              break;
+            case CompassDirection c:
               break;
           }
         }
@@ -176,6 +185,17 @@ namespace CStoTSTest
       expectedTS.AppendLine("    if (val instanceof Date) {");
       expectedTS.AppendLine("      let d: Date = val;");
       expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    if (typeof val === \"function\") {");
+      expectedTS.AppendLine("      let c: Test.CompassDirection = val;");
+      expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export enum CompassDirection {");
+      expectedTS.AppendLine("    North,");
+      expectedTS.AppendLine("    East,");
+      expectedTS.AppendLine("    South,");
+      expectedTS.AppendLine("    West,");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

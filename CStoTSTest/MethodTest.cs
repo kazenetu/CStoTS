@@ -256,6 +256,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("      this.Method5(param1, param2, param3);");
       expectedTS.AppendLine("      return;");
       expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    throw new Error('Error');");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("}");
 

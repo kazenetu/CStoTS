@@ -212,13 +212,14 @@ namespace CStoTSTest
       expectedTS.AppendLine("  private ReturnMethod2(value: number): number {");
       expectedTS.AppendLine("    return value;");
       expectedTS.AppendLine("  }");
-      expectedTS.AppendLine("  public ReturnMethod(param1: string | number): any {");
+      expectedTS.AppendLine("  public ReturnMethod(param1: string | number): string | number {");
       expectedTS.AppendLine("    if (typeof param1 === 'string') {");
       expectedTS.AppendLine("      return this.ReturnMethod1(param1);");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("    if (typeof param1 === 'number') {");
       expectedTS.AppendLine("      return this.ReturnMethod2(param1);");
       expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("    throw new Error('Error');");
       expectedTS.AppendLine("  }");
       expectedTS.AppendLine("  public ReturnEnumMethod(value: Test.CompassDirection): Test.CompassDirection {");
       expectedTS.AppendLine("    return Test.CompassDirection.North;");

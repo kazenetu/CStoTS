@@ -144,12 +144,11 @@ namespace CStoTS.Domain.Model.Converter
         var existsNoneParam = paramCounts.Min() <= 0;
         var maxParamCount = paramCounts.Max();
 
-        // 複数戻り値の存在確認
-        var retrunTypeCount = targetItems.
+        // 戻り値の取得
+        var retrunTypes = targetItems.
               Select(returnTypeItem => ExpressionsToString(returnTypeItem.item.MethodTypes)).
-              Distinct().
-              Count();
-        var isMultiReturnType = retrunTypeCount > 1;
+              Distinct();
+        var isMultiReturnType = retrunTypes.Count() > 1; 
 
         // パラメータリストを生成
         var methodArgs = new Dictionary<int, List<string>>();
@@ -232,15 +231,16 @@ namespace CStoTS.Domain.Model.Converter
         }
 
         // 戻り値
-        var methodType = returnType;
-        if(isMultiReturnType)
-        {
-          methodType = "any";
-        }
+        var methodType = string.Join(" | ", retrunTypes);
+        //if(isMultiReturnType)
+        //{
+        //  methodType = "any";
+        //}
 
         result.Append($"): {methodType}");
         result.AppendLine(" {");
         result.Append(methodResult.ToString());
+        result.AppendLine($"{GetIndentSpace(indent + 1)}throw new Error('Error');");
         result.AppendLine($"{indentSpace}}}");
       }
 

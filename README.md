@@ -35,7 +35,7 @@ git pull --recurse-submodules
    * [X] ローカルフィールド
    * [X] ローカルメソッド
    * [X] if-else構文
-   * [ ] switch構文
+   * [X] switch構文
    * [ ] for構文
    * [ ] foreach構文
    * [ ] while構文

@@ -71,7 +71,7 @@ namespace CStoTSTest
       expectedTS.AppendLine("");
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): void {");
-      expectedTS.AppendLine("    let list: List = new List<string>();");
+      expectedTS.AppendLine("    let list: List<string> = new List<string>();");
       expectedTS.AppendLine("    list.Add(\"A\");");
       expectedTS.AppendLine("    list.Add(\"B\");");
       expectedTS.AppendLine("    list.Add(\"C\");");

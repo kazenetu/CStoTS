@@ -109,7 +109,7 @@ namespace CStoTSTest
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  public Method(): void {");
-      expectedTS.AppendLine("    let list:number[] = [1, 2, 3];");
+      expectedTS.AppendLine("    let list: number[] = [1, 2, 3];");
       expectedTS.AppendLine("    for (let i: number = 0; i < list.length; i++) {");
       expectedTS.AppendLine("    }");
       expectedTS.AppendLine("  }");

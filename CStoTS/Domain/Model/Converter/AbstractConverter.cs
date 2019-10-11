@@ -272,10 +272,22 @@ namespace CStoTS.Domain.Model.Converter
       switch (lowerSrc)
       {
         case "bool":
+        case "boolean":
           return "boolean";
         case "int":
         case "decimal":
         case "long":
+        case "byte":
+        case "int16":
+        case "int32":
+        case "int64":
+        case "sbyte":
+        case "uint16":
+        case "uint32":
+        case "uint64":
+        case "biginteger":
+        case "double":
+        case "single":
           return "number";
         case "datetime":
           return "Date";

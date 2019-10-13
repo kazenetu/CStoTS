@@ -37,6 +37,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemSwitch), ()=>new ConvertSwitch() },
       {typeof(IItemSwitchCase), ()=>new ConvertSwitch() },
       {typeof(IItemFor), ()=>new ConvertFor() },
+      {typeof(IItemForEach), ()=>new ConvertForEach() },
     };
 
     /// <summary>

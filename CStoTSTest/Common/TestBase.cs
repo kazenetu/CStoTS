@@ -56,16 +56,28 @@ namespace CStoTS
     /// TypeScript変換
     /// </summary>
     /// <param name="withoutMethod">メソッド除外を追加するか否か</param>
-    public void ConvertTS(bool withoutMethod = false)
+    /// <param name="inputCSRoot">入力：C#のルートパス</param>
+    /// <param name="outputTSRoot">出力：TypeScriptのルートパス</param>
+    public void ConvertTS(bool withoutMethod = false, string inputCSRoot = null, string outputTSRoot = null)
     {
       var mode = OutputMode.Mode.All;
-      if(withoutMethod){
+      if (withoutMethod)
+      {
         // メソッド除外
         mode = OutputMode.Mode.WithoutMethod;
       }
 
       var csToTs = new ConvertApplication();
-      csToTs.Convert(Config.Create(mode, string.Empty, string.Empty), tsFiles, csFiles);
+      if (string.IsNullOrEmpty(inputCSRoot) || string.IsNullOrEmpty(outputTSRoot))
+      {
+        // 読み込みと書き込みのスタブを使用
+        csToTs.Convert(Config.Create(mode, string.Empty, string.Empty), tsFiles, csFiles);
+      }
+      else
+      {
+        // 実際に読み込みと書き込みを行う
+        csToTs.Convert(Config.Create(inputCSRoot, outputTSRoot));
+      }
     }
 
     /// <summary>

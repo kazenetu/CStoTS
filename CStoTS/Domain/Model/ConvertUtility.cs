@@ -39,6 +39,7 @@ namespace CStoTS.Domain.Model
       {typeof(IItemFor), ()=>new ConvertFor() },
       {typeof(IItemForEach), ()=>new ConvertForEach() },
       {typeof(IItemWhile), ()=>new ConvertWhile() },
+      {typeof(IItemDo), ()=>new ConvertDoWhile() },
     };
 
     /// <summary>

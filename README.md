@@ -40,5 +40,6 @@ git pull --recurse-submodules
    * [X] foreach構文
    * [X] while構文
    * [X] do-while構文
+* [ ] TypeScript出力機能のテスト作成・実装
 
 

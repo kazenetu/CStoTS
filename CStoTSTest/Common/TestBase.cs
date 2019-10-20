@@ -41,6 +41,17 @@ namespace CStoTS
     }
 
     /// <summary>
+    /// C#コード作成
+    /// </summary>
+    /// <param name="addUsing">追加Using</param>
+    /// <param name="sourceCode">ソースコード</param>
+    /// <returns>C#コード</returns>
+    protected string CreateCSCode(string addUsing, string sourceCode)
+    {
+      return string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode);
+    }
+
+    /// <summary>
     /// C#入力ソースコード作成
     /// </summary>
     /// <param name="fileName">ファイル名</param>
@@ -48,8 +59,7 @@ namespace CStoTS
     /// <param name="sourceCode">ソースコード</param>
     public void CreateFileData(string fileName, string addUsing, string sourceCode)
     {
-      var source = string.Format(CultureInfo.CurrentCulture, BaseSource, addUsing, sourceCode);
-      csFiles.Add(fileName, source);
+      csFiles.Add(fileName, CreateCSCode(addUsing, sourceCode));
     }
 
     /// <summary>

@@ -16,6 +16,14 @@ namespace CStoTS.Infrastructure
     /// <param name="tsData">変換後のTypeScript文字列</param>
     public void WriteFile(string filePath, string tsData)
     {
+      // ディレクトリの確認と作成
+      var directoryPath = Path.GetDirectoryName(filePath);
+      if (!Directory.Exists(directoryPath))
+      {
+        Directory.CreateDirectory(directoryPath);
+      }
+
+      // ファイル作成
       using (var sw = new StreamWriter(filePath, false, Encoding.UTF8))
       {
         sw.Write(tsData);

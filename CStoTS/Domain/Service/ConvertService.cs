@@ -3,6 +3,7 @@ using CStoTS.Domain.Model;
 using CStoTS.Domain.Model.Mode;
 using CStoTS.Infrastructure;
 using System;
+using System.IO;
 
 namespace CStoTS.Domain.Service
 {
@@ -29,7 +30,7 @@ namespace CStoTS.Domain.Service
 
         // output file
         var filePath = ev.FilePath.Replace(".cs", ".ts", StringComparison.CurrentCulture);
-        outputRepository.WriteFile($"{config.OutputTSRoot.Value}{filePath}", result);
+        outputRepository.WriteFile($"{Path.Combine(config.OutputTSRoot.Value, filePath)}", result);
       });
 
       // Run C# Analyze

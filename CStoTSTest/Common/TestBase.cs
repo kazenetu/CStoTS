@@ -7,6 +7,9 @@ using System.Text;
 
 namespace CStoTS
 {
+  /// <summary>
+  /// テスト用スーパークラス
+  /// </summary>
   public class TestBase
   {
     /// <summary>

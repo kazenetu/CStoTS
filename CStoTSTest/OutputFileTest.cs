@@ -130,6 +130,7 @@ namespace CStoTSTest
 
     #endregion
 
+    #region テスト
 
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
@@ -164,5 +165,6 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    #endregion
   }
 }

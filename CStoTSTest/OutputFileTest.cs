@@ -170,6 +170,268 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラス(インスタンスフィールドにクラス定義)のテスト
+    /// </summary>
+    [Fact(DisplayName = "MultiReferenceTest")]
+    public void MultiReferenceTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+      }
+      public class MyClass
+      {
+      }");
+      CreateCSFile(inputPath, "sub.cs", 
+      @"public class Sub:Test
+      {
+        private MyClass field;
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test, MyClass } from './test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("  private field: MyClass;");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// フォルダ階層違いのテスト
+    /// </summary>
+    [Fact(DisplayName = "OtherDirectoryTest")]
+    public void OtherDirectoryTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "base/test.cs", 
+      @"public class Test
+      {
+      }");
+      CreateCSFile(inputPath, "sub.cs", 
+      @"public class Sub:Test
+      {
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from './base/test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// フォルダ階層違い(逆順)のテスト
+    /// </summary>
+    [Fact(DisplayName = "OtherDirectoryReverseTest")]
+    public void OtherDirectoryReverseTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+      }");
+      CreateCSFile(inputPath, "sub/sub.cs", 
+      @"public class Sub:Test
+      {
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "sub/sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from '../test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// フォルダ階層違い(別フォルダ)のテスト
+    /// </summary>
+    [Fact(DisplayName = "DifferenceReferenceTest")]
+    public void DifferenceReferenceTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "base/test.cs", 
+      @"public class Test
+      {
+      }");
+      CreateCSFile(inputPath, "sub/sub.cs", 
+      @"public class Sub:Test
+      {
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "sub/sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from '../base/test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// フォルダ階層違い(フォルダの深さ)のテスト
+    /// </summary>
+    [Fact(DisplayName = "EachReferenceTest")]
+    public void EachReferenceTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "base/test.cs", 
+      @"public class Test
+      {
+      }");
+      CreateCSFile(inputPath, "base/sub/sub.cs", 
+      @"public class Sub:Test
+      {
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "base/sub/sub.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from '../test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Sub extends Test {");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// ジェネリクスのテスト
+    /// </summary>
+    [Fact(DisplayName = "CollectionTest")]
+    public void CollectionTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        private List<string> field1;
+        private Dictionary<int,string> field2;
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Dictionary } from './Dictionary';");
+      expectedTS.AppendLine("import { List } from './List';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  private field1: List<string>;");
+      expectedTS.AppendLine("  private field2: Dictionary<number, string>;");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// 内部クラス利用のテスト
+    /// </summary>
+    [Fact(DisplayName = "UseInnerClassTest")]
+    public void UseInnerClassTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        public class Inner {
+        }
+      }");
+      CreateCSFile(inputPath, "other.cs", 
+      @"public class Other
+      {
+        private Test.Inner field;
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "other.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { Test } from './test';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Other {");
+      expectedTS.AppendLine("  private field: Test.Inner;");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
     #endregion
   }
 }

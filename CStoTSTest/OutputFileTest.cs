@@ -134,8 +134,7 @@ namespace CStoTSTest
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
-      var methodName = nameof(StandardTest);
-      
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
       var inputPath = GetInputPath(methodName);
       var outputPath = GetOutputPath(methodName);
 

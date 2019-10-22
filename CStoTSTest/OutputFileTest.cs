@@ -8,6 +8,7 @@ namespace CStoTSTest
   [Trait("ファイル出力テスト", nameof(OutputFileTest))]
   public class OutputFileTest : TestBase
   {
+    #region 専用フィールド・メソッド
     /// <summary>
     /// テスト用ベースパス
     /// </summary>
@@ -128,6 +129,7 @@ namespace CStoTSTest
       return File.ReadAllText(filePath);
     }
 
+    #endregion
     #endregion
 
     #region テスト

@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("外部ファイル参照のテスト", nameof(ImportTest))]
   public class ImportTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -36,6 +39,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラス(インスタンスフィールドにクラス定義)のテスト
+    /// </summary>
     [Fact(DisplayName = "MultiReferenceTest")]
     public void MultiReferenceTest()
     {
@@ -70,6 +76,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// フォルダ階層違いのテスト
+    /// </summary>
     [Fact(DisplayName = "OtherDirectoryTest")]
     public void OtherDirectoryTest()
     {
@@ -99,6 +108,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// フォルダ階層違い(逆順)のテスト
+    /// </summary>
     [Fact(DisplayName = "OtherDirectoryReverseTest")]
     public void OtherDirectoryReverseTest()
     {
@@ -128,6 +140,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// フォルダ階層違い(別フォルダ)のテスト
+    /// </summary>
     [Fact(DisplayName = "DifferenceReferenceTest")]
     public void DifferenceReferenceTest()
     {
@@ -157,6 +172,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// フォルダ階層違い(フォルダの深さ)のテスト
+    /// </summary>
     [Fact(DisplayName = "EachReferenceTest")]
     public void EachReferenceTest()
     {
@@ -186,6 +204,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスのテスト
+    /// </summary>
     [Fact(DisplayName = "CollectionTest")]
     public void CollectionTest()
     {
@@ -216,6 +237,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラス利用のテスト
+    /// </summary>
     [Fact(DisplayName = "UseInnerClassTest")]
     public void UseInnerClassTest()
     {

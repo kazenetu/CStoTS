@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("メソッド出力除外のテスト", nameof(WithoutMethodTest))]
   public class WithoutMethodTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "FieldTest")]
     public void FieldOnlyTest()
     {
@@ -37,6 +40,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// プロパティのテスト
+    /// </summary>
     [Fact(DisplayName = "PropertyTest")]
     public void PropertyTest()
     {
@@ -102,6 +108,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラス定義のテスト
+    /// </summary>
     [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {
@@ -134,6 +143,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// コンストラクタのテスト
+    /// </summary>
     [Fact(DisplayName = "ConstructorTest")]
     public void ConstructorTest()
     {
@@ -165,6 +177,7 @@ namespace CStoTSTest
       var actualTS = GetTypeScript("test.ts");
       Assert.NotNull(actualTS);
 
+      // メソッド定義なし
       var expectedTS = new StringBuilder();
       expectedTS.AppendLine("export class Test {");
       expectedTS.AppendLine("  private field: string = \"\";");
@@ -179,6 +192,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インターフェースのテスト
+    /// </summary>
     [Fact(DisplayName = "InterfaceTest")]
     public void StandardTest()
     {

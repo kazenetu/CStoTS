@@ -132,6 +132,9 @@ namespace CStoTSTest
 
     #region テスト
 
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {

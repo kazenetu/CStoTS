@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("C#の特定メソッドをTypeScriptのメソッドに置き換えのテスト", nameof(ReplaceTSMethodTest))]
   public class ReplaceTSMethodTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StringMethodTest")]
     public void StringMethodTest()
     {
@@ -51,6 +54,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// int型のメソッド置き換えのテスト
+    /// </summary>
     [Fact(DisplayName = "IntMethodTest")]
     public void IntMethodTest()
     {

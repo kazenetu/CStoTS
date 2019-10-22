@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("フィールドのテスト", nameof(FieldTest))]
   public class FieldTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -32,6 +35,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// デフォルト設定のテスト
+    /// </summary>
     [Fact(DisplayName = "DefaultTest")]
     public void DefaultTest()
     {
@@ -57,6 +63,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// プライベートのテスト
+    /// </summary>
     [Fact(DisplayName = "PrivateTest")]
     public void PrivateTest()
     {
@@ -82,6 +91,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Protectedのテスト
+    /// </summary>
     [Fact(DisplayName = "ProtectedTest")]
     public void ProtectedTest()
     {
@@ -107,6 +119,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスフィールドのテスト
+    /// </summary>
     [Fact(DisplayName = "MultiTest")]
     public void MultiTest()
     {
@@ -142,6 +157,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスフィールドのテスト
+    /// </summary>
     [Fact(DisplayName = "StaticTest")]
     public void StaticTest()
     {

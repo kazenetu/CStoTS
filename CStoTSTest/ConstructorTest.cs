@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("コンストラクタのテスト", nameof(ConstructorTest))]
   public class ConstructorTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -35,6 +38,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// パラメータありのテスト
+    /// </summary>
     [Fact(DisplayName = "ExistsParamTest")]
     public void ExistsParamTest()
     {
@@ -63,6 +69,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラスのテスト
+    /// </summary>
     [Fact(DisplayName = "SubClassTest")]
     public void SubClassTest()
     {
@@ -101,6 +110,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラス(パラメータあり)のテスト
+    /// </summary>
     [Fact(DisplayName = "SubClassExistsParamTest")]
     public void SubClassExistsParamTest()
     {
@@ -139,6 +151,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラスのテスト
+    /// </summary>
     [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {
@@ -180,6 +195,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// オーバーロードのテスト
+    /// </summary>
     [Fact(DisplayName = "OverloadTest")]
     public void OverloadTest()
     {
@@ -250,6 +268,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// プライベートコンストラクタのテスト
+    /// </summary>
     [Fact(DisplayName = "PrivateTest")]
     public void PrivateTest()
     {
@@ -278,6 +299,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Protecteコンストラクタのテスト
+    /// </summary>
     [Fact(DisplayName = "ProtectedTest")]
     public void ProtectedTest()
     {
@@ -306,6 +330,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// プライベートコンストラクタのオーバーロードのテスト
+    /// </summary>
     [Fact(DisplayName = "PrivateScopeOverloadTest")]
     public void PrivateScopeOverloadTest()
     {

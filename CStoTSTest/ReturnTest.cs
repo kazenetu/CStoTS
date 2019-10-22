@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("Returnのテスト", nameof(ReturnTest))]
   public class ReturnTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -37,6 +40,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// intの戻り値のテスト
+    /// </summary>
     [Fact(DisplayName = "IntTest")]
     public void IntTest()
     {
@@ -67,6 +73,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスインスタンスの戻り値のテスト
+    /// </summary>
     [Fact(DisplayName = "InstanceTest")]
     public void InstanceTest()
     {
@@ -103,7 +112,10 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
-  [Fact(DisplayName = "InstanceExistsParamsTest")]
+    /// <summary>
+    /// クラスインスタンス(パラメータありコンストラクタ)の戻り値のテスト
+    /// </summary>
+    [Fact(DisplayName = "InstanceExistsParamsTest")]
     public void InstanceExistsParamsTest()
     {
       // C#ソース作成
@@ -142,6 +154,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インスタンスフィールドの戻り値のテスト
+    /// </summary>
     [Fact(DisplayName = "FieldRefarenceTest")]
     public void FieldRefarenceTest()
     {

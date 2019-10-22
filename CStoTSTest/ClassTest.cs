@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("クラスのテスト", nameof(ClassTest))]
   public class ClassTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -30,6 +33,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラスのテスト
+    /// </summary>
     [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {
@@ -60,6 +66,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラスのテスト
+    /// </summary>
     [Fact(DisplayName = "SubClassTest")]
     public void SubClassTest()
     {
@@ -89,6 +98,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
@@ -112,6 +124,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスのサブクラスのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsSubTest")]
     public void GenericsSubTest()
     {
@@ -141,6 +156,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクススーパークラスのサブクラスのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsSubFixedTypeTest")]
     public void GenericsSubFixedTypeTest()
     {
@@ -171,6 +189,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// コメントのテスト
+    /// </summary>
     [Fact(DisplayName = "CommentTest")]
     public void CommentTest()
     {
@@ -207,6 +228,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インターフェース継承のテスト
+    /// </summary>
     [Fact(DisplayName = "InterfaceTest")]
     public void InterfaceTest()
     {
@@ -242,6 +266,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インターフェース多重継承のテスト
+    /// </summary>
     [Fact(DisplayName = "MultiInterfaceTest")]
     public void MultiInterfaceTest()
     {
@@ -282,6 +309,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// staticクラスのテスト
+    /// </summary>
     [Fact(DisplayName = "StaticTest")]
     public void StaticTest()
     {
@@ -305,6 +335,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 複数クラス定義のテスト
+    /// </summary>
     [Fact(DisplayName = "MultiClassTest")]
     public void MultiClassTest()
     {

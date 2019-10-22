@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("条件分岐のテスト", nameof(IfElseTest))]
   public class IfElseTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -70,6 +73,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インスタンスフィールドとプロパティのテスト
+    /// </summary>
     [Fact(DisplayName = "MemberTest")]
     public void MemberTest()
     {
@@ -114,6 +120,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Type確認のテスト
+    /// </summary>
     [Fact(DisplayName = "TypeTest")]
     public void TypeTest()
     {
@@ -181,6 +190,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 列挙型のテスト
+    /// </summary>
     [Fact(DisplayName = "EnumTest")]
     public void EnumTest()
     {
@@ -230,6 +242,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// メソッド呼び出しのテスト
+    /// </summary>
     [Fact(DisplayName = "CallMethodTest")]
     public void CallMethodTest()
     {

@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("列挙型のテスト", nameof(EnumTest))]
   public class EnumTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -46,6 +49,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// デフォルト設定のテスト
+    /// </summary>
     [Fact(DisplayName = "DefaultValueTest")]
     public void DefaultValueTest()
     {
@@ -85,6 +91,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// フィールド定義のテスト
+    /// </summary>
     [Fact(DisplayName = "FieldTest")]
     public void FieldTest()
     {
@@ -126,6 +135,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// プロパティ設定のテスト
+    /// </summary>
     [Fact(DisplayName = "PropertyTest")]
     public void PropertyTest()
     {
@@ -170,6 +182,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 他クラスでの参照のテスト
+    /// </summary>
     [Fact(DisplayName = "OtherClassTest")]
     public void OtherClassTest()
     {

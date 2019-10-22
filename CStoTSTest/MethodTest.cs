@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("メソッドのテスト", nameof(MethodTest))]
   public class MethodTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -35,6 +38,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Privateメソッドのテスト
+    /// </summary>
     [Fact(DisplayName = "PrivateMethodTest")]
     public void PrivateMethodTest()
     {
@@ -63,6 +69,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Protectedメソッドのテスト
+    /// </summary>
     [Fact(DisplayName = "ProtectedMethodTest")]
     public void ProtectedMethodTest()
     {
@@ -91,6 +100,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// パラメータありのテスト
+    /// </summary>
     [Fact(DisplayName = "ExistsParamTest")]
     public void ExistsParamTest()
     {
@@ -119,6 +131,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// サブクラスのオーバーライドのテスト
+    /// </summary>
     [Fact(DisplayName = "SubClassTest")]
     public void SubClassTest()
     {
@@ -156,6 +171,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラスのメソッド定義のテスト
+    /// </summary>
     [Fact(DisplayName = "InnerClassTest")]
     public void InnerClassTest()
     {
@@ -192,6 +210,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// オーバーロードのテスト
+    /// </summary>
     [Fact(DisplayName = "OverloadTest")]
     public void OverloadTest()
     {
@@ -263,6 +284,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
@@ -291,6 +315,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスメソッドのテスト
+    /// </summary>
     [Fact(DisplayName = "StaticTest")]
     public void StaticTest()
     {

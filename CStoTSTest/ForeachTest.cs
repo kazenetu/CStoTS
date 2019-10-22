@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("反復処理(foreach)のテスト", nameof(ForeachTest))]
   public class ForeachTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -42,6 +45,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクス(List)のテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsListTest")]
     public void GenericsListTest()
     {
@@ -85,6 +91,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクス(Dictionary)のテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsDictionaryTest")]
     public void GenericsDictionaryTest()
     {

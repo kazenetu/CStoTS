@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("ローカルフィールドのテスト", nameof(LocalDeclarationTest))]
   public class LocalDeclarationTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -46,6 +49,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラス生成のテスト
+    /// </summary>
     [Fact(DisplayName = "DeclarationClassTest")]
     public void DeclarationClassTest()
     {
@@ -97,6 +103,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 列挙型のテスト
+    /// </summary>
     [Fact(DisplayName = "DeclarationEnumTest")]
     public void DeclarationEnumTest()
     {
@@ -148,6 +157,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// メソッド利用のテスト
+    /// </summary>
     [Fact(DisplayName = "DefaultMethodValueTest")]
     public void DefaultMethodValueTest()
     {

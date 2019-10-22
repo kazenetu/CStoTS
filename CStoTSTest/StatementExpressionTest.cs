@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("式のテスト", nameof(StatementExpressionTest))]
   public class StatementExpressionTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -41,6 +44,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 一行コメントのテスト
+    /// </summary>
     [Fact(DisplayName = "LineCommentTest")]
     public void LineCommentTest()
     {

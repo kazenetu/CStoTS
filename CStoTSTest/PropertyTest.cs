@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("プロパティのテスト", nameof(PropertyTest))]
   public class PropertyTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -47,6 +50,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 設定・取得のテスト
+    /// </summary>
     [Fact(DisplayName = "SetGetTest")]
     public void SetGetTest()
     {
@@ -78,6 +84,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
     
+    /// <summary>
+    /// スコープ違いのテスト
+    /// </summary>
     [Fact(DisplayName = "EachModifiyTest")]
     public void EachModifiyTest()
     {
@@ -109,6 +118,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスプロパティのテスト
+    /// </summary>
     [Fact(DisplayName = "StaticTest")]
     public void StaticTest()
     {

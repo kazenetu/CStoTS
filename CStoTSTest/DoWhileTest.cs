@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("反復処理(do while)のテスト", nameof(DoWhileTest))]
   public class DoWhileTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -44,6 +47,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 条件式中のインクリメントのテスト
+    /// </summary>
     [Fact(DisplayName = "AdditionTest")]
     public void AdditionTest()
     {
@@ -79,6 +85,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
@@ -126,6 +135,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 配列のテスト
+    /// </summary>
     [Fact(DisplayName = "ArrayTest")]
     public void ArrayTest()
     {
@@ -165,6 +177,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インスタンスフィールド参照のテスト
+    /// </summary>
     [Fact(DisplayName = "InstanceFieldTest")]
     public void InstancePropertyTest()
     {
@@ -204,6 +219,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// クラスフィールド参照のテスト
+    /// </summary>
     [Fact(DisplayName = "StaticFieldTest")]
     public void StaticFieldTest()
     {

@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("インターフェースのテスト", nameof(InterfaceTest))]
   public class InterfaceTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -30,6 +33,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクス使用のテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
@@ -53,6 +59,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスインターフェースのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsSubFixedTypeTest")]
     public void GenericsSubFixedTypeTest()
     {
@@ -83,6 +92,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Protectedスコープのテスト
+    /// </summary>
     [Fact(DisplayName = "ProtectedScopeTest")]
     public void ProtectedScopeTest()
     {
@@ -106,6 +118,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Internalスコープのテスト
+    /// </summary>
     [Fact(DisplayName = "InternalScopeTest")]
     public void InternalScopeTest()
     {
@@ -129,6 +144,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// Privateスコープのテスト
+    /// </summary>
     [Fact(DisplayName = "PrivateScopeTest")]
     public void PrivateScopeTest()
     {
@@ -152,6 +170,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// スコープなしのテスト
+    /// </summary>
     [Fact(DisplayName = "NotExitsScopeTest")]
     public void NotExitsScopeTest()
     {
@@ -175,6 +196,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// メンバー定義のテスト
+    /// </summary>
     [Fact(DisplayName = "MemberTest")]
     public void MemberTest()
     {
@@ -202,6 +226,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// メンバー定義(パラメータありメソッド)のテスト
+    /// </summary>
     [Fact(DisplayName = "MultiMemberTest")]
     public void MultiMemberTest()
     {
@@ -229,6 +256,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクスメンバーのテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsMemberTest")]
     public void GenericsMemberTest()
     {

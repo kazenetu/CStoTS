@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("ローカルメソッドのテスト", nameof(LocalFunctionTest))]
   public class LocalFunctionTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -64,6 +67,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 内部クラスでのメソッドテスト
+    /// </summary>
     [Fact(DisplayName = "DeclarationClassTest")]
     public void DeclarationClassTest()
     {
@@ -120,6 +126,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 戻り値(列挙型)のテスト
+    /// </summary>
     [Fact(DisplayName = "DeclarationEnumTest")]
     public void DeclarationEnumTest()
     {

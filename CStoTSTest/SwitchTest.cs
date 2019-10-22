@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("複数条件分岐のテスト", nameof(SwitchTest))]
   public class SwitchTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -46,6 +49,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// defaultラベルありのテスト
+    /// </summary>
     [Fact(DisplayName = "ExistsDefaultTest")]
     public void ExistsDefaultTest()
     {
@@ -89,6 +95,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 複数ラベルのテスト
+    /// </summary>
     [Fact(DisplayName = "MultiCaseTest")]
     public void MultiCaseTest()
     {
@@ -134,6 +143,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ローカルフィールドありのテスト
+    /// </summary>
     [Fact(DisplayName = "TypeCaseTest")]
     public void TypeCaseTest()
     {
@@ -202,6 +214,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インスタンスプロパティのテスト
+    /// </summary>
     [Fact(DisplayName = "InstancePropertyTest")]
     public void InstancePropertyTest()
     {
@@ -248,6 +263,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// インスタンスメソッドのテスト
+    /// </summary>
     [Fact(DisplayName = "InstanceMethodTest")]
     public void InstanceMethodTest()
     {
@@ -296,6 +314,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 列挙型のテスト
+    /// </summary>
     [Fact(DisplayName = "EnumTest")]
     public void EnumTest()
     {

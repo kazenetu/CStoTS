@@ -7,6 +7,9 @@ namespace CStoTSTest
   [Trait("反復処理(for)のテスト", nameof(ForTest))]
   public class ForTest : TestBase
   {
+    /// <summary>
+    /// 標準テスト
+    /// </summary>
     [Fact(DisplayName = "StandardTest")]
     public void StandardTest()
     {
@@ -40,6 +43,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// ジェネリクス(List)のテスト
+    /// </summary>
     [Fact(DisplayName = "GenericsTest")]
     public void GenericsTest()
     {
@@ -83,6 +89,9 @@ namespace CStoTSTest
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
 
+    /// <summary>
+    /// 配列のテスト
+    /// </summary>
     [Fact(DisplayName = "ArrayTest")]
     public void ArrayTest()
     {

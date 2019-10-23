@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="./OutputFileTest/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="CSharpAnalyze">
       <HintPath>..\Lib\CSharpAnalyze\Lib\Debug\CSharpAnalyze.dll</HintPath>
     </Reference>

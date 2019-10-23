@@ -431,6 +431,261 @@ namespace CStoTSTest
 
       Assert.Equal(expectedTS.ToString(), actualTS);
     }
+    //-----------------------------------------------------
+
+    /// <summary>
+    /// ローカルフィールドのテスト
+    /// </summary>
+    [Fact(DisplayName = "LocalFieldTest")]
+    public void LocalFieldTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        public void Method()
+        {
+          var localVar = ""abc"";
+          string localString1 = ""DEF"";
+          string localString2;
+          int localInt1 = 0;
+          int localInt2;
+        }
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      // 変換後の期待値設定
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("    let localVar: string = \"abc\";");
+      expectedTS.AppendLine("    let localString1: string = \"DEF\";");
+      expectedTS.AppendLine("    let localString2: string;");
+      expectedTS.AppendLine("    let localInt1: number = 0;");
+      expectedTS.AppendLine("    let localInt2: number;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// ローカルフィールド：クラス生成のテスト
+    /// </summary>
+    [Fact(DisplayName = "DeclarationClassTest")]
+    public void DeclarationClassTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "myclass.cs", 
+      @"public class MyClass
+      {
+        public class Inner {
+        }
+      }");
+
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        public void Method()
+        {
+          var localMyClass1 = new MyClass();
+          MyClass localMyClass2 = new MyClass();
+          MyClass localMyClass3;
+
+          var localInner1 = new MyClass.Inner();
+          MyClass.Inner localInner2 = new MyClass.Inner();
+          MyClass.Inner localInner3;
+        }
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      // 変換後の期待値設定
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("import { MyClass } from './myclass';");
+      expectedTS.AppendLine("");
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("    let localMyClass1: MyClass = new MyClass();");
+      expectedTS.AppendLine("    let localMyClass2: MyClass = new MyClass();");
+      expectedTS.AppendLine("    let localMyClass3: MyClass;");
+      expectedTS.AppendLine("    let localInner1: MyClass.Inner = new MyClass.Inner();");
+      expectedTS.AppendLine("    let localInner2: MyClass.Inner = new MyClass.Inner();");
+      expectedTS.AppendLine("    let localInner3: MyClass.Inner;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// int型のメソッド置き換えのテスト
+    /// </summary>
+    [Fact(DisplayName = "IntMethodTest")]
+    public void IntMethodTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        public int Method1()
+        {
+          return ""123"".Length;
+        }
+        public int Method2()
+        {
+          return int.Parse(""123"");
+        }
+        public int Method3()
+        {
+          return Decimal.Parse(""123"");
+        }
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  public Method1(): number {");
+      expectedTS.AppendLine("    return \"123\".length;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("  public Method2(): number {");
+      expectedTS.AppendLine("    return Number(\"123\");");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("  public Method3(): number {");
+      expectedTS.AppendLine("    return Number(\"123\");");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// 式のテスト
+    /// </summary>
+    [Fact(DisplayName = "ExpressionTest")]
+    public void ExpressionTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        private int field;
+        public void Method()
+        {
+          this.field = 10*2+1;
+          this.field = this.field/2;
+        }
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  private field: number;");
+      expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("    this.field = 10 * 2 + 1;");
+      expectedTS.AppendLine("    this.field = this.field / 2;");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
+    /// <summary>
+    /// if：列挙型のテスト
+    /// </summary>
+    [Fact(DisplayName = "EnumTest")]
+    public void EnumTest()
+    {
+      var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+      var inputPath = GetInputPath(methodName);
+      var outputPath = GetOutputPath(methodName);
+
+      // C#ソース作成
+      CreateCSFile(inputPath, "test.cs", 
+      @"public class Test
+      {
+        private enum CompassDirection
+        {
+          North,
+          East,
+          South,
+          West
+        }
+
+        public void Method(){
+          var compassDirection = CompassDirection.North;
+          if(compassDirection == CompassDirection.North){
+          }
+        }
+      }");
+
+      // 変換
+      ConvertTS(false, inputPath, outputPath);
+
+      // 変換確認
+      var actualTS = GetTSFile(outputPath, "test.ts");
+      Assert.NotNull(actualTS);
+
+      // 変換後の期待値設定
+      var expectedTS = new StringBuilder();
+      expectedTS.AppendLine("export class Test {");
+      expectedTS.AppendLine("  public Method(): void {");
+      expectedTS.AppendLine("    let compassDirection: Test.CompassDirection = Test.CompassDirection.North;");
+      expectedTS.AppendLine("    if (compassDirection === Test.CompassDirection.North) {");
+      expectedTS.AppendLine("    }");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+      expectedTS.AppendLine("export namespace Test {");
+      expectedTS.AppendLine("  export enum CompassDirection {");
+      expectedTS.AppendLine("    North,");
+      expectedTS.AppendLine("    East,");
+      expectedTS.AppendLine("    South,");
+      expectedTS.AppendLine("    West,");
+      expectedTS.AppendLine("  }");
+      expectedTS.AppendLine("}");
+
+      Assert.Equal(expectedTS.ToString(), actualTS);
+    }
+
 
     #endregion
   }

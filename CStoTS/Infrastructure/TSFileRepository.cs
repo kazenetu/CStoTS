@@ -36,11 +36,12 @@ namespace CStoTS.Infrastructure
     /// <param name="outputTSRoot">出力：TypeScriptのルートパス</param>
     public void OutputFixedTypeScripts(string outputTSRoot)
     {
+      var baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
       // 固定TSクラスをコピー
       var tsFileNames = new List<string>() { "Dictionary.ts", "List.ts", "JSONConverter.ts" };
       foreach (var tsFileName in tsFileNames)
       {
-        File.Copy($"Infrastructure/TypeScripts/{tsFileName}", Path.Combine(outputTSRoot, tsFileName), true);
+        File.Copy($"{baseDirectory}/Infrastructure/TypeScripts/{tsFileName}", Path.Combine(outputTSRoot, tsFileName), true);
       }
     }
   }

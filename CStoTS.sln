@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvertCStoTS", "ConvertCStoTS\ConvertCStoTS.csproj", "{60AA71CF-BA4F-4A63-825E-BE6A9A20442D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{418E8F56-18DF-4312-87AB-701BD8FFEC59} = {418E8F56-18DF-4312-87AB-701BD8FFEC59}
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CStoTS", "CStoTS\CStoTS.csproj", "{418E8F56-18DF-4312-87AB-701BD8FFEC59}"
 EndProject
 Global
@@ -11,6 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60AA71CF-BA4F-4A63-825E-BE6A9A20442D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AA71CF-BA4F-4A63-825E-BE6A9A20442D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AA71CF-BA4F-4A63-825E-BE6A9A20442D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AA71CF-BA4F-4A63-825E-BE6A9A20442D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{418E8F56-18DF-4312-87AB-701BD8FFEC59}.Release|Any CPU.ActiveCfg = Release|Any CPU

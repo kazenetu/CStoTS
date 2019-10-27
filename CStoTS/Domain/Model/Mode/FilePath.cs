@@ -41,6 +41,21 @@ namespace CStoTS.Domain.Model.Mode
     }
 
     /// <summary>
+    /// 確認対象のファイルパスが最後に指定されているか確認
+    /// </summary>
+    /// <param name="filePath">確認対象のファイルパス</param>
+    /// <returns>最後に指定されているか否か</returns>
+    public bool EndsWith(string filePath)
+    {
+      if (!HasValue)
+      {
+        return false;
+      }
+
+      return Value.EndsWith(filePath, System.StringComparison.CurrentCulture);
+    }
+
+    /// <summary>
     /// インスタンス取得
     /// </summary>
     /// <param name="filePath">ファイルパス</param>

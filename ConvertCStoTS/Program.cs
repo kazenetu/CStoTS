@@ -71,7 +71,7 @@ namespace ConvertCStoTS
         {
           mode = OutputMode.Mode.WithoutMethod;
         }
-        csToTs.Convert(Config.Create(mode,srcPath, destPath));
+        csToTs.Convert(Config.Create(mode, srcPath, destPath, filePath));
 
         Console.WriteLine("---Convert End---");
       }

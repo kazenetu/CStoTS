@@ -49,7 +49,7 @@ namespace CStoTS.Domain.Model.Mode
     {
       if (!HasValue)
       {
-        return false;
+        return true;
       }
 
       return Value.EndsWith(filePath, System.StringComparison.CurrentCulture);

@@ -18,7 +18,7 @@
     /// <summary>
     /// 入力：C#のファイル指定
     /// </summary>
-    public string InputFile { get; private set; }
+    public FilePath InputFile { get; private set; }
 
     /// <summary>
     /// 出力：TypeScriptのルートパス
@@ -32,7 +32,7 @@
     /// <param name="inputCSRoot">入力：C#のルートパス</param>
     /// <param name="inputFile">出力：TypeScriptのルートパス</param>
     /// <param name="outputTSRoot">出力：TypeScriptのルートパス</param>
-    private Config(OutputMode mode, RootPath inputCSRoot, RootPath outputTSRoot, string inputFile)
+    private Config(OutputMode mode, RootPath inputCSRoot, RootPath outputTSRoot, FilePath inputFile)
     {
       Mode = mode;
       InputCSRoot = inputCSRoot;
@@ -49,7 +49,7 @@
     /// <returns></returns>
     public static Config Create(string inputCSRoot, string outputTSRoot, string inputFile = null)
     {
-      return new Config(OutputMode.Create(OutputMode.Mode.All), RootPath.Create(inputCSRoot), RootPath.Create(outputTSRoot), inputFile);
+      return new Config(OutputMode.Create(OutputMode.Mode.All), RootPath.Create(inputCSRoot), RootPath.Create(outputTSRoot), FilePath.Create(inputFile));
     }
 
     /// <summary>
@@ -62,7 +62,7 @@
     /// <returns></returns>
     public static Config Create(OutputMode.Mode mode, string inputCSRoot, string outputTSRoot, string inputFile = null)
     {
-      return new Config(OutputMode.Create(mode), RootPath.Create(inputCSRoot), RootPath.Create(outputTSRoot), inputFile);
+      return new Config(OutputMode.Create(mode), RootPath.Create(inputCSRoot), RootPath.Create(outputTSRoot), FilePath.Create(inputFile));
     }
   }
 }

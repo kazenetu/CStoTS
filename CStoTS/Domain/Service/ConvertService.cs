@@ -26,7 +26,7 @@ namespace CStoTS.Domain.Service
       csApplication.Register<CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed>(csApplication, (ev) =>
       {
         // File指定確認
-        if (!string.IsNullOrEmpty(config.InputFile) && !ev.FilePath.EndsWith(config.InputFile, StringComparison.CurrentCulture))
+        if (!config.InputFile.EndsWith(ev.FilePath))
         {
           return;
         }

@@ -13,6 +13,17 @@ namespace CStoTS.Domain.Model.Mode
     public string Value { get; private set; }
 
     /// <summary>
+    /// パスの設定確認
+    /// </summary>
+    public bool HasValue
+    {
+      get
+      {
+        return !string.IsNullOrEmpty(Value);
+      }
+    }
+
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="path">ルートパス</param>

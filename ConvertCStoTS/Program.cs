@@ -59,7 +59,7 @@ namespace ConvertCStoTS
       var filePath = argManager.GetOptionArg(new List<string>() { "--file", " -f" });
 
       // Output Method
-      var isOutputMethod = !argManager.ExistsOptionArg("--no_method_output");
+      var isOutputMethod = argManager.ExistsOptionArg("--no_method_output");
 
       try
       {

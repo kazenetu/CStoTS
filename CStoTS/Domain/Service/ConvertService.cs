@@ -25,6 +25,12 @@ namespace CStoTS.Domain.Service
       // Register Analyzed Event
       csApplication.Register<CSharpAnalyze.Domain.PublicInterfaces.Events.IAnalyzed>(csApplication, (ev) =>
       {
+        // File指定確認
+        if (!string.IsNullOrEmpty(config.InputFile) && !ev.FilePath.EndsWith(config.InputFile, StringComparison.CurrentCulture))
+        {
+          return;
+        }
+
         var converter = new MainConverter();
         var result = converter.ConvertTS(ev, config);
 

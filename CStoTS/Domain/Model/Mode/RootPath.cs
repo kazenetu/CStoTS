@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CStoTS.Domain.Model.Mode
 {
@@ -17,7 +15,7 @@ namespace CStoTS.Domain.Model.Mode
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="path">ルートパス</param>
     private RootPath(string path)
     {
       Value = path;

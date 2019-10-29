@@ -53,5 +53,5 @@ dotnet run -c Release -p ConvertCStoTS/ConvertCStoTS.csproj Example/Sources --fi
    * [X] while構文
    * [X] do-while構文
 * [X] TypeScript出力機能のテスト作成・実装
-* [ ] Console実装
+* [X] Console実装
 

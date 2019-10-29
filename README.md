@@ -15,6 +15,18 @@ git clone --recursive https://github.com/kazenetu/CStoTS.git
 git pull --recurse-submodules
 ```
 
+## 実行方法例
+```sh
+# 一括変換(Example/SourcesのC#ソースコードを変換してExample/ConvertResults/Allに生成)
+dotnet run -c Release -p ConvertCStoTS/ConvertCStoTS.csproj Example/Sources --out Example/ConvertResults/All
+
+# ファイル指定(Example/SourcesのC#ソースコードを変換してExample/ConvertResults/Fileに生成)
+dotnet run -c Release -p ConvertCStoTS/ConvertCStoTS.csproj Example/Sources --file TestMethod.cs --out Example/ConvertResults/File
+
+# ファイル指定・メソッド除外(Example/SourcesのC#ソースコードを変換してExample/ConvertResults//WithoutMethodに生成)
+dotnet run -c Release -p ConvertCStoTS/ConvertCStoTS.csproj Example/Sources --file TestMethod.cs --out Example/ConvertResults/WithoutMethod --no_method_output
+```
+
 ## テスト方法
 * VisualStudio(2017以上)を利用する場合  
   ```CStoTSTest.sln```を開いてテストを行う

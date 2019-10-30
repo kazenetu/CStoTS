@@ -1,5 +1,6 @@
 # CStoTS
 C#をTypeScriptに変換するツール  
+
 <table>
 <tr>
 <td>
@@ -15,29 +16,21 @@ TypeScript
 <td>
 
 ```Csharp
-namespace Sample
+public class TestClass
 {
-  public class TestClass
+  public class InnerClass
   {
-    public class InnerClass
-    {
-      public static string StaticField = "789";
+    public static string StaticField = "789";
 
-      public static string StaticMethod()
-      {
-        return "aaa";
-      }
-
-      public static string StaticMethodArg(string name)
-      {
-        return "hellow!" + name;
-      }
-    }
-    public static string StaticField = "456";
     public static string StaticMethod()
     {
-      return "bbb";
+      return "aaa";
     }
+  }
+  public static string StaticField = "456";
+  public static string StaticMethod()
+  {
+    return "bbb";
   }
 }
 ```  
@@ -60,9 +53,6 @@ export namespace TestClass {
     public static StaticField: string = "789";
     public static StaticMethod(): string {
       return "aaa";
-    }
-    public static StaticMethodArg(name: string): string {
-      return "hellow!" + name;
     }
   }
 }

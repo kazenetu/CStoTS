@@ -58,8 +58,8 @@ namespace CStoTS.Domain.Model.Converter
         }
       }
 
-      // アクセサのメンバー確認とフィールドの作成
-      if (item.AccessorList.Where(accessor => accessor.Members.Count() == 0).Any())
+      // クラスの場合はアクセサのメンバー確認とフィールドの作成
+      if (item.Parent is IItemClass && item.AccessorList.Where(accessor => accessor.Members.Count() == 0).Any())
       {
         result.Append($"{indentSpace}private {staticScope}_{item.Name}_: {ExpressionsToString(item.PropertyTypes)}");
 
@@ -84,6 +84,20 @@ namespace CStoTS.Domain.Model.Converter
       // 定義
       var scope = GetScope(item) + staticScope;
       var propertyType = ExpressionsToString(item.PropertyTypes);
+      if(item.Parent is IItemInterface)
+      {
+        // インターフェースの場合はフィールドとして登録
+        if (item.Modifiers.Contains("static"))
+        {
+            scope += "static ";
+        }
+        result.Append($"{indentSpace}{scope}{item.Name}");
+        result.Append($": {ExpressionsToString(item.PropertyTypes)}");
+        result.AppendLine(";");
+        return result.ToString();
+      }
+
+      // プロパティとして登録
       foreach (var accessor in item.AccessorList)
       {
         result.Append(comment);

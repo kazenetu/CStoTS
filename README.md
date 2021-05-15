@@ -70,12 +70,13 @@ export namespace TestClass {
    ```sh
    git clone --recursive https://github.com/kazenetu/CStoTS.git
    ```
-1. publish
+1. publish  
+   ※**-f**にインストール済みの「netcoreapp2.1」「netcoreapp3.1」「net5.0」いずれかのSDKを指定すること
    ```sh
    cd CStoTS
 
    # CStoTS/publishにdllなどのファイルが出力される
-   dotnet publish ConvertCStoTS -c Release -o publish
+   dotnet publish ConvertCStoTS -c Release -o publish -f [netcoreapp2.1 | netcoreapp3.1 | net5.0]
    ```
 
 ## 使用方法

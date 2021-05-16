@@ -128,10 +128,11 @@ export namespace TestClass {
 * VisualStudio(2017以上)を利用する場合  
   ```CStoTSTest.sln```を開いてテストを行う
 
-* dotnetコマンドを利用する場合
+* dotnetコマンドを利用する場合  
+   ※**-f**にインストール済みの「netcoreapp2.1」「netcoreapp3.1」「net5.0」いずれかのSDKを指定すること
   ```sh
   #CStoTSTest/CStoTSTest.csprojのテストを実施
-  dotnet test ./CStoTSTest/CStoTSTest.csproj
+  dotnet test ./CStoTSTest/CStoTSTest.csproj -f [netcoreapp2.1 | netcoreapp3.1 | net5.0]
   ```
 
 ## ライセンス
